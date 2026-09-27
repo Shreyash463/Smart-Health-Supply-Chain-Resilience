@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Health & Supply Chain Resilience — BRICS Track 3 MVP</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    /* Custom scrollbar & glass styling */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.95; transform: scale(1.01); }
+    }
+    .crisis-card-pulse {
+      animation: pulse-subtle 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col font-sans text-slate-800 antialiased selection:bg-emerald-100 selection:text-emerald-900">
+
+  <!-- Top Navigation & Live Ticker Bar -->
+  <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-40 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Brand Info -->
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-md">
+            <i data-lucide="shield-plus" class="w-6 h-6 text-slate-950 stroke-[2.5]"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-lg tracking-tight">SmartHealth Resilience</span>
+              <span class="bg-emerald-500/20 text-emerald-300 text-xs px-2 py-0.5 rounded-full font-semibold border border-emerald-500/30">BRICS Track 3</span>
+            </div>
+            <p class="text-xs text-slate-400 hidden sm:block">Public Health Network Predictive Early Warning & Supply Chain Redistribution</p>
+          </div>
+        </div>
+
+        <!-- System Controls & Live Stats -->
+        <div class="flex items-center space-x-2 sm:space-x-4">
+          <!-- Backend/AI Status Badge -->
+          <div id="aiStatusBadge" class="hidden md:flex items-center space-x-1.5 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700 text-xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-slate-300 font-medium">Gemini Flash</span>
+            <span class="text-slate-400 text-[10px]">gemini-flash-latest</span>
+          </div>
+
+          <!-- Quick Refresh Button -->
+          <button id="btnRefresh" title="Refresh Live Forecast" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors flex items-center space-x-1 text-xs">
+            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Refresh</span>
+          </button>
+
+          <!-- Reset / Seed Demo Button -->
+          <button id="btnResetDemo" title="Reset Demo Data" class="px-3 py-1.5 rounded-lg bg-rose-950/40 hover:bg-rose-900/60 text-rose-300 border border-rose-800/60 transition-colors flex items-center space-x-1.5 text-xs font-medium">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span class="hidden sm:inline">Reset Baseline</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-bar: Network KPI Highlights -->
+    <div class="bg-slate-950/60 border-t border-slate-800/80 py-2">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between text-xs gap-3">
+        <div class="flex items-center space-x-4 text-slate-300">
+          <span class="flex items-center space-x-1.5">
+            <span class="text-slate-400">Total PHCs:</span>
+            <strong id="kpiTotalPhcs" class="text-white font-semibold">8</strong>
+          </span>
+          <span class="flex items-center space-x-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span>
+            <span class="text-slate-400">Critical Stockouts:</span>
+            <strong id="kpiCriticalPhcs" class="text-rose-400 font-bold">2</strong>
+          </span>
+          <span class="flex items-center space-x-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
+            <span class="text-slate-400">Low Stock (<10d):</span>
+            <strong id="kpiAmberPhcs" class="text-amber-300 font-semibold">1</strong>
+          </span>
+          <span class="flex items-center space-x-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span>
+            <span class="text-slate-400">Resilient / Optimal:</span>
+            <strong id="kpiGreenPhcs" class="text-emerald-300 font-semibold">5</strong>
+          </span>
+        </div>
+
+        <div class="flex items-center space-x-2 text-slate-400 text-[11px]">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-slate-400"></i>
+          <span>Live Forecast Horizon: <strong>14 Days Predictive</strong></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Live Toast Banner for Actions -->
+  <div id="toastContainer" class="fixed top-20 right-4 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+
+    <!-- Live Urgent Alerts Banner (Gemini Early Warning Panel) -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="px-5 py-4 bg-gradient-to-r from-rose-50 via-amber-50 to-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center font-bold">
+            <i data-lucide="bell-ring" class="w-5 h-5 animate-bounce"></i>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-slate-900 flex items-center space-x-2">
+              <span>Automated Early Warnings & Resource Redistribution Feed</span>
+              <span id="activeAlertsBadge" class="bg-rose-600 text-white text-[11px] px-2 py-0.5 rounded-full font-semibold">2 Active</span>
+            </h2>
+            <p class="text-xs text-slate-500">Autonomous Gemini AI-evaluated intra-district surplus matches and dispatch orders</p>
+          </div>
+        </div>
+
+        <!-- Filter for Resolved / Active -->
+        <div class="flex items-center space-x-2 text-xs">
+          <span class="text-slate-500">View:</span>
+          <button id="btnFilterAlertsActive" class="px-2.5 py-1 rounded-md bg-rose-600 text-white font-medium shadow-xs">Active Only</button>
+          <button id="btnFilterAlertsAll" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">All History</button>
+        </div>
+      </div>
+
+      <!-- Alerts List -->
+      <div id="alertsContainer" class="p-4 sm:p-5 divide-y divide-slate-100 max-h-80 overflow-y-auto">
+        <!-- Rendered dynamically by JavaScript -->
+        <div class="py-8 text-center text-slate-400 text-sm">
+          <i data-lucide="loader-2" class="w-6 h-6 animate-spin mx-auto mb-2 text-slate-400"></i>
+          Loading real-time early warnings...
+        </div>
+      </div>
+    </section>
+
+    <!-- PHC Network Monitoring Section -->
+    <section class="space-y-4">
+      <!-- Section Header with Filter Tabs -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 tracking-tight">Primary Health Centres (PHC) Network Status</h2>
+          <p class="text-xs text-slate-500">Real-time inventory levels, worst-case days left runway, and live emergency crisis simulation</p>
+        </div>
+
+        <!-- District Filter Pills -->
+        <div class="inline-flex rounded-xl bg-slate-200/80 p-1 text-xs font-medium text-slate-600">
+          <button id="tabDistrictAll" class="district-tab active px-3 py-1.5 rounded-lg bg-white text-slate-900 font-semibold shadow-xs transition-all">
+            All PHCs (8)
+          </button>
+          <button id="tabDistrictPimpri" class="district-tab px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all">
+            Pimpri-Chinchwad (4)
+          </button>
+          <button id="tabDistrictNationB" class="district-tab px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all">
+            Nation B Nodes (4)
+          </button>
+        </div>
+      </div>
+
+      <!-- PHC Cards Grid -->
+      <div id="phcGridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <!-- Rendered dynamically -->
+        <div class="col-span-full py-16 text-center text-slate-400">
+          <i data-lucide="loader-2" class="w-8 h-8 animate-spin mx-auto mb-3 text-slate-400"></i>
+          Fetching PHC telemetry and calculating medicine runways...
+        </div>
+      </div>
+    </section>
+
+    <!-- BRICS Interoperability & Decentralized Resilience Panel -->
+    <section class="bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-800">
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
+        <div class="space-y-3 max-w-3xl">
+          <div class="flex items-center space-x-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+            <i data-lucide="globe-2" class="w-4 h-4"></i>
+            <span>BRICS Track 3 Architectural Standard: Mutual Supply Chain Resilience</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-white">
+            Interoperability & Sovereign Cross-Border Cooperation
+          </h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            In this multi-district architecture, each participating municipality or nation-state (represented here by <strong>Pimpri-Chinchwad</strong> and regional partner <strong>Nation B</strong>) hosts an autonomous instance of this exact schema and API. No raw patient records, personally identifiable medical data, or proprietary procurement records cross network boundaries. Instead, decentralized nodes publish standard <em>aggregated stockout risk indicators</em> and <em>surplus capacity signals</em> via an open REST/JSON contract. This enables immediate peer-to-peer early warnings, automated inter-district redistribution recommendations, and joint emergency procurement — resolving supply chain bottlenecks before they trigger frontline healthcare stockouts while strictly preserving local data sovereignty.
+          </p>
+          <div class="flex flex-wrap items-center gap-2 pt-2 text-xs">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 border border-slate-700">
+              <i data-lucide="lock" class="w-3.5 h-3.5 mr-1.5 text-emerald-400"></i> Zero Patient Data Exposure
+            </span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 border border-slate-700">
+              <i data-lucide="share-2" class="w-3.5 h-3.5 mr-1.5 text-teal-400"></i> Standardized API Schema
+            </span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 border border-slate-700">
+              <i data-lucide="cpu" class="w-3.5 h-3.5 mr-1.5 text-indigo-400"></i> Gemini Flash AI Ops Engine
+            </span>
+          </div>
+        </div>
+
+        <!-- Visual Architecture Badge -->
+        <div class="w-full md:w-64 bg-slate-800/60 rounded-xl p-4 border border-slate-700/80 flex flex-col justify-between shrink-0">
+          <div class="text-xs font-semibold text-slate-300 mb-2 flex items-center justify-between">
+            <span>Federated Signal Bus</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          </div>
+          <div class="space-y-2 text-[11px] text-slate-400">
+            <div class="flex justify-between pb-1 border-b border-slate-700/60">
+              <span>District 1 Protocol:</span>
+              <span class="text-slate-200 font-mono">Pimpri-Chinchwad</span>
+            </div>
+            <div class="flex justify-between pb-1 border-b border-slate-700/60">
+              <span>District 2 Protocol:</span>
+              <span class="text-slate-200 font-mono">Nation B Regional</span>
+            </div>
+            <div class="flex justify-between pb-1 border-b border-slate-700/60">
+              <span>Transfer Rule:</span>
+              <span class="text-emerald-400 font-medium">Intra-District Match</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Procurement Fallback:</span>
+              <span class="text-amber-300 font-medium">Auto-Triggered</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center space-x-2">
+        <span class="font-semibold text-slate-700">Smart Health & Supply Chain Resilience</span>
+        <span>•</span>
+        <span>Build with AI: Code for Communities (2nd Edition, Track 3)</span>
+      </div>
+      <div>
+        <span>Model: <code class="font-mono text-emerald-600 bg-emerald-50 px-1 py-0.5 rounded">gemini-flash-latest</code></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- PHC Detail Modal (Stock Table, 21-Day Chart, Gauge Bars) -->
+  <!-- ======================================================== -->
+  <div id="phcModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+    <div class="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh]">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between shrink-0">
+        <div class="flex items-center space-x-3">
+          <div id="modalStatusDot" class="w-3.5 h-3.5 rounded-full bg-emerald-400"></div>
+          <div>
+            <h3 id="modalPhcName" class="text-lg font-bold">PHC Name</h3>
+            <p id="modalPhcDistrict" class="text-xs text-slate-400">District • Coordinates</p>
+          </div>
+        </div>
+        <button id="btnModalClose" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="p-6 overflow-y-auto space-y-6 flex-1 text-slate-800">
+        
+        <!-- Quick stats summary row -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <span class="text-xs text-slate-500 font-medium">Worst Medicine Runway</span>
+            <p id="modalWorstDays" class="text-lg font-extrabold text-slate-900 mt-0.5">--</p>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <span class="text-xs text-slate-500 font-medium">Beds Capacity</span>
+            <p id="modalBeds" class="text-lg font-extrabold text-slate-900 mt-0.5">--</p>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <span class="text-xs text-slate-500 font-medium">Today's Footfall</span>
+            <p id="modalFootfall" class="text-lg font-extrabold text-slate-900 mt-0.5">--</p>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <span class="text-xs text-slate-500 font-medium">Staff Present</span>
+            <p id="modalStaff" class="text-lg font-extrabold text-slate-900 mt-0.5">--</p>
+          </div>
+        </div>
+
+        <!-- 21-Day Trailing Trends Chart -->
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center space-x-1.5">
+              <i data-lucide="trending-up" class="w-4 h-4 text-emerald-600"></i>
+              <span>21-Day Historical Footfall & Staff Attendance</span>
+            </h4>
+            <span class="text-[11px] text-slate-400">Daily logged trends</span>
+          </div>
+          <div class="w-full h-52 relative">
+            <canvas id="historyChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Medicine Stock Table & Days Left Bars -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center space-x-1.5">
+              <i data-lucide="pill" class="w-4 h-4 text-indigo-600"></i>
+              <span>Essential Medicine Inventory & Predictive Runway</span>
+            </h4>
+            <span class="text-[11px] text-slate-500">12 Essential Medicines</span>
+          </div>
+
+          <div class="overflow-x-auto border border-slate-200 rounded-xl">
+            <table class="min-w-full divide-y divide-slate-200 text-xs">
+              <thead class="bg-slate-100 text-slate-600 font-semibold uppercase text-[10px] tracking-wider">
+                <tr>
+                  <th scope="col" class="py-2.5 px-3 text-left">Medicine</th>
+                  <th scope="col" class="py-2.5 px-3 text-right">In Stock</th>
+                  <th scope="col" class="py-2.5 px-3 text-right">Daily Usage</th>
+                  <th scope="col" class="py-2.5 px-4 text-left">Stock Runway (Days)</th>
+                  <th scope="col" class="py-2.5 px-3 text-center">Status</th>
+                  <th scope="col" class="py-2.5 px-3 text-center">Simulate</th>
+                </tr>
+              </thead>
+              <tbody id="modalStockTableBody" class="divide-y divide-slate-100 bg-white">
+                <!-- Stock rows rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3 bg-slate-100 border-t border-slate-200 flex items-center justify-between shrink-0">
+        <span class="text-xs text-slate-500">Threshold: Red &lt; 5d | Amber &lt; 10d | Green &ge; 10d</span>
+        <button id="btnModalCloseBottom" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold">
+          Close View
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script src="/static/app.js"></script>
+  <script>
+    // Initialize Lucide icons on DOM ready
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

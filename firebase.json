@@ -1,0 +1,72 @@
+{
+  "hosting": {
+    "public": "frontend",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/phcs",
+        "run": {
+          "serviceId": "smart-health-resilience",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/alerts**",
+        "run": {
+          "serviceId": "smart-health-resilience",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/stock/**",
+        "run": {
+          "serviceId": "smart-health-resilience",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/forecast/**",
+        "run": {
+          "serviceId": "smart-health-resilience",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/simulate-crisis/**",
+        "run": {
+          "serviceId": "smart-health-resilience",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/phc/**",
+        "run": {
+          "serviceId": "smart-health-resilience",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/seed",
+        "run": {
+          "serviceId": "smart-health-resilience",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/health",
+        "run": {
+          "serviceId": "smart-health-resilience",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

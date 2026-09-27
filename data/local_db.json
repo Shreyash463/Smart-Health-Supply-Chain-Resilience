@@ -1,0 +1,3314 @@
+{
+  "phcs": {
+    "phc_kiwale": {
+      "id": "phc_kiwale",
+      "name": "PHC Kiwale",
+      "district": "Pimpri-Chinchwad",
+      "lat": 18.6657,
+      "lng": 73.7432,
+      "contact_phone": "+91 20 2742 5101",
+      "bed_capacity": 30,
+      "beds_occupied": 21
+    },
+    "phc_talegaon": {
+      "id": "phc_talegaon",
+      "name": "PHC Talegaon",
+      "district": "Pimpri-Chinchwad",
+      "lat": 18.7282,
+      "lng": 73.6844,
+      "contact_phone": "+91 20 2742 5102",
+      "bed_capacity": 35,
+      "beds_occupied": 19
+    },
+    "phc_chikhli": {
+      "id": "phc_chikhli",
+      "name": "PHC Chikhli",
+      "district": "Pimpri-Chinchwad",
+      "lat": 18.6745,
+      "lng": 73.8055,
+      "contact_phone": "+91 20 2742 5103",
+      "bed_capacity": 25,
+      "beds_occupied": 14
+    },
+    "phc_dehu_road": {
+      "id": "phc_dehu_road",
+      "name": "PHC Dehu Road",
+      "district": "Pimpri-Chinchwad",
+      "lat": 18.6833,
+      "lng": 73.7225,
+      "contact_phone": "+91 20 2742 5104",
+      "bed_capacity": 28,
+      "beds_occupied": 20
+    },
+    "phc_alandi": {
+      "id": "phc_alandi",
+      "name": "PHC Alandi",
+      "district": "Nation B",
+      "lat": 18.6775,
+      "lng": 73.8967,
+      "contact_phone": "+91 2135 232101",
+      "bed_capacity": 32,
+      "beds_occupied": 25
+    },
+    "phc_khed": {
+      "id": "phc_khed",
+      "name": "PHC Khed",
+      "district": "Nation B",
+      "lat": 18.85,
+      "lng": 73.9,
+      "contact_phone": "+91 2135 232102",
+      "bed_capacity": 40,
+      "beds_occupied": 24
+    },
+    "phc_shirur": {
+      "id": "phc_shirur",
+      "name": "PHC Shirur",
+      "district": "Nation B",
+      "lat": 18.826,
+      "lng": 74.378,
+      "contact_phone": "+91 2135 232103",
+      "bed_capacity": 30,
+      "beds_occupied": 16
+    },
+    "phc_junnar": {
+      "id": "phc_junnar",
+      "name": "PHC Junnar",
+      "district": "Nation B",
+      "lat": 19.2064,
+      "lng": 73.8767,
+      "contact_phone": "+91 2135 232104",
+      "bed_capacity": 35,
+      "beds_occupied": 18
+    }
+  },
+  "medicines": {
+    "med_paracetamol": {
+      "id": "med_paracetamol",
+      "name": "Paracetamol 500mg Tablets",
+      "unit": "strips",
+      "category": "Analgesic / Antipyretic"
+    },
+    "med_ors": {
+      "id": "med_ors",
+      "name": "Oral Rehydration Salts (ORS)",
+      "unit": "sachets",
+      "category": "Electrolyte Solution"
+    },
+    "med_amoxicillin": {
+      "id": "med_amoxicillin",
+      "name": "Amoxicillin 500mg Capsules",
+      "unit": "capsules",
+      "category": "Antibiotic"
+    },
+    "med_insulin": {
+      "id": "med_insulin",
+      "name": "Insulin Regular 100 IU/mL",
+      "unit": "vials",
+      "category": "Hormone / Endocrine"
+    },
+    "med_iv_fluids": {
+      "id": "med_iv_fluids",
+      "name": "IV Normal Saline 0.9% 500ml",
+      "unit": "bottles",
+      "category": "Intravenous Infusion"
+    },
+    "med_artemether": {
+      "id": "med_artemether",
+      "name": "Artemether + Lumefantrine",
+      "unit": "strips",
+      "category": "Antimalarial"
+    },
+    "med_azithromycin": {
+      "id": "med_azithromycin",
+      "name": "Azithromycin 500mg Tablets",
+      "unit": "strips",
+      "category": "Antibiotic"
+    },
+    "med_metformin": {
+      "id": "med_metformin",
+      "name": "Metformin 500mg Tablets",
+      "unit": "strips",
+      "category": "Antidiabetic"
+    },
+    "med_salbutamol": {
+      "id": "med_salbutamol",
+      "name": "Salbutamol Inhaler 100mcg",
+      "unit": "inhalers",
+      "category": "Respiratory / Bronchodilator"
+    },
+    "med_oxytocin": {
+      "id": "med_oxytocin",
+      "name": "Oxytocin Injection 10 IU/ml",
+      "unit": "ampoules",
+      "category": "Maternal Health / Labor"
+    },
+    "med_ciprofloxacin": {
+      "id": "med_ciprofloxacin",
+      "name": "Ciprofloxacin 500mg Tablets",
+      "unit": "strips",
+      "category": "Antibiotic"
+    },
+    "med_cetirizine": {
+      "id": "med_cetirizine",
+      "name": "Cetirizine 10mg Tablets",
+      "unit": "strips",
+      "category": "Antihistamine"
+    }
+  },
+  "stock": {
+    "phc_kiwale_med_paracetamol": {
+      "id": "phc_kiwale_med_paracetamol",
+      "phc_id": "phc_kiwale",
+      "medicine_id": "med_paracetamol",
+      "current_qty": 396,
+      "avg_daily_consumption": 27.6,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_kiwale_med_ors": {
+      "id": "phc_kiwale_med_ors",
+      "phc_id": "phc_kiwale",
+      "medicine_id": "med_ors",
+      "current_qty": 246,
+      "avg_daily_consumption": 14.4,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_kiwale_med_amoxicillin": {
+      "id": "phc_kiwale_med_amoxicillin",
+      "phc_id": "phc_kiwale",
+      "medicine_id": "med_amoxicillin",
+      "current_qty": 321,
+      "avg_daily_consumption": 13.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_kiwale_med_insulin": {
+      "id": "phc_kiwale_med_insulin",
+      "phc_id": "phc_kiwale",
+      "medicine_id": "med_insulin",
+      "current_qty": 8,
+      "avg_daily_consumption": 3.5,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_kiwale_med_iv_fluids": {
+      "id": "phc_kiwale_med_iv_fluids",
+      "phc_id": "phc_kiwale",
+      "medicine_id": "med_iv_fluids",
+      "current_qty": 175,
+      "avg_daily_consumption": 8.8,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_kiwale_med_artemether": {
+      "id": "phc_kiwale_med_artemether",
+      "phc_id": "phc_kiwale",
+      "medicine_id": "med_artemether",
+      "current_qty": 88,
+      "avg_daily_consumption": 5.2,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_kiwale_med_azithromycin": {
+      "id": "phc_kiwale_med_azithromycin",
+      "phc_id": "phc_kiwale",
+      "medicine_id": "med_azithromycin",
+      "current_qty": 120,
+      "avg_daily_consumption": 8.4,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_kiwale_med_metformin": {
+      "id": "phc_kiwale_med_metformin",
+      "phc_id": "phc_kiwale",
+      "medicine_id": "med_metformin",
+      "current_qty": 385,
+      "avg_daily_consumption": 16.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_kiwale_med_salbutamol": {
+      "id": "phc_kiwale_med_salbutamol",
+      "phc_id": "phc_kiwale",
+      "medicine_id": "med_salbutamol",
+      "current_qty": 63,
+      "avg_daily_consumption": 3.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_kiwale_med_oxytocin": {
+      "id": "phc_kiwale_med_oxytocin",
+      "phc_id": "phc_kiwale",
+      "medicine_id": "med_oxytocin",
+      "current_qty": 68,
+      "avg_daily_consumption": 2.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_kiwale_med_ciprofloxacin": {
+      "id": "phc_kiwale_med_ciprofloxacin",
+      "phc_id": "phc_kiwale",
+      "medicine_id": "med_ciprofloxacin",
+      "current_qty": 151,
+      "avg_daily_consumption": 6.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_kiwale_med_cetirizine": {
+      "id": "phc_kiwale_med_cetirizine",
+      "phc_id": "phc_kiwale",
+      "medicine_id": "med_cetirizine",
+      "current_qty": 296,
+      "avg_daily_consumption": 15.8,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_talegaon_med_paracetamol": {
+      "id": "phc_talegaon_med_paracetamol",
+      "phc_id": "phc_talegaon",
+      "medicine_id": "med_paracetamol",
+      "current_qty": 624,
+      "avg_daily_consumption": 22.8,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_talegaon_med_ors": {
+      "id": "phc_talegaon_med_ors",
+      "phc_id": "phc_talegaon",
+      "medicine_id": "med_ors",
+      "current_qty": 226,
+      "avg_daily_consumption": 14.8,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_talegaon_med_amoxicillin": {
+      "id": "phc_talegaon_med_amoxicillin",
+      "phc_id": "phc_talegaon",
+      "medicine_id": "med_amoxicillin",
+      "current_qty": 276,
+      "avg_daily_consumption": 10.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_talegaon_med_insulin": {
+      "id": "phc_talegaon_med_insulin",
+      "phc_id": "phc_talegaon",
+      "medicine_id": "med_insulin",
+      "current_qty": 210,
+      "avg_daily_consumption": 4.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_talegaon_med_iv_fluids": {
+      "id": "phc_talegaon_med_iv_fluids",
+      "phc_id": "phc_talegaon",
+      "medicine_id": "med_iv_fluids",
+      "current_qty": 283,
+      "avg_daily_consumption": 11.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_talegaon_med_artemether": {
+      "id": "phc_talegaon_med_artemether",
+      "phc_id": "phc_talegaon",
+      "medicine_id": "med_artemether",
+      "current_qty": 176,
+      "avg_daily_consumption": 6.4,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_talegaon_med_azithromycin": {
+      "id": "phc_talegaon_med_azithromycin",
+      "phc_id": "phc_talegaon",
+      "medicine_id": "med_azithromycin",
+      "current_qty": 173,
+      "avg_daily_consumption": 8.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_talegaon_med_metformin": {
+      "id": "phc_talegaon_med_metformin",
+      "phc_id": "phc_talegaon",
+      "medicine_id": "med_metformin",
+      "current_qty": 482,
+      "avg_daily_consumption": 21.3,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_talegaon_med_salbutamol": {
+      "id": "phc_talegaon_med_salbutamol",
+      "phc_id": "phc_talegaon",
+      "medicine_id": "med_salbutamol",
+      "current_qty": 92,
+      "avg_daily_consumption": 4.2,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_talegaon_med_oxytocin": {
+      "id": "phc_talegaon_med_oxytocin",
+      "phc_id": "phc_talegaon",
+      "medicine_id": "med_oxytocin",
+      "current_qty": 40,
+      "avg_daily_consumption": 2.8,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_talegaon_med_ciprofloxacin": {
+      "id": "phc_talegaon_med_ciprofloxacin",
+      "phc_id": "phc_talegaon",
+      "medicine_id": "med_ciprofloxacin",
+      "current_qty": 119,
+      "avg_daily_consumption": 6.6,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_talegaon_med_cetirizine": {
+      "id": "phc_talegaon_med_cetirizine",
+      "phc_id": "phc_talegaon",
+      "medicine_id": "med_cetirizine",
+      "current_qty": 212,
+      "avg_daily_consumption": 12.3,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_chikhli_med_paracetamol": {
+      "id": "phc_chikhli_med_paracetamol",
+      "phc_id": "phc_chikhli",
+      "medicine_id": "med_paracetamol",
+      "current_qty": 398,
+      "avg_daily_consumption": 22.3,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_chikhli_med_ors": {
+      "id": "phc_chikhli_med_ors",
+      "phc_id": "phc_chikhli",
+      "medicine_id": "med_ors",
+      "current_qty": 317,
+      "avg_daily_consumption": 16.6,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_chikhli_med_amoxicillin": {
+      "id": "phc_chikhli_med_amoxicillin",
+      "phc_id": "phc_chikhli",
+      "medicine_id": "med_amoxicillin",
+      "current_qty": 203,
+      "avg_daily_consumption": 12.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_chikhli_med_insulin": {
+      "id": "phc_chikhli_med_insulin",
+      "phc_id": "phc_chikhli",
+      "medicine_id": "med_insulin",
+      "current_qty": 103,
+      "avg_daily_consumption": 3.8,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_chikhli_med_iv_fluids": {
+      "id": "phc_chikhli_med_iv_fluids",
+      "phc_id": "phc_chikhli",
+      "medicine_id": "med_iv_fluids",
+      "current_qty": 250,
+      "avg_daily_consumption": 11.1,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_chikhli_med_artemether": {
+      "id": "phc_chikhli_med_artemether",
+      "phc_id": "phc_chikhli",
+      "medicine_id": "med_artemether",
+      "current_qty": 133,
+      "avg_daily_consumption": 5.5,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_chikhli_med_azithromycin": {
+      "id": "phc_chikhli_med_azithromycin",
+      "phc_id": "phc_chikhli",
+      "medicine_id": "med_azithromycin",
+      "current_qty": 140,
+      "avg_daily_consumption": 7.3,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_chikhli_med_metformin": {
+      "id": "phc_chikhli_med_metformin",
+      "phc_id": "phc_chikhli",
+      "medicine_id": "med_metformin",
+      "current_qty": 514,
+      "avg_daily_consumption": 22.4,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_chikhli_med_salbutamol": {
+      "id": "phc_chikhli_med_salbutamol",
+      "phc_id": "phc_chikhli",
+      "medicine_id": "med_salbutamol",
+      "current_qty": 89,
+      "avg_daily_consumption": 3.8,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_chikhli_med_oxytocin": {
+      "id": "phc_chikhli_med_oxytocin",
+      "phc_id": "phc_chikhli",
+      "medicine_id": "med_oxytocin",
+      "current_qty": 74,
+      "avg_daily_consumption": 3.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_chikhli_med_ciprofloxacin": {
+      "id": "phc_chikhli_med_ciprofloxacin",
+      "phc_id": "phc_chikhli",
+      "medicine_id": "med_ciprofloxacin",
+      "current_qty": 95,
+      "avg_daily_consumption": 6.6,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_chikhli_med_cetirizine": {
+      "id": "phc_chikhli_med_cetirizine",
+      "phc_id": "phc_chikhli",
+      "medicine_id": "med_cetirizine",
+      "current_qty": 243,
+      "avg_daily_consumption": 13.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_dehu_road_med_paracetamol": {
+      "id": "phc_dehu_road_med_paracetamol",
+      "phc_id": "phc_dehu_road",
+      "medicine_id": "med_paracetamol",
+      "current_qty": 636,
+      "avg_daily_consumption": 23.4,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_dehu_road_med_ors": {
+      "id": "phc_dehu_road_med_ors",
+      "phc_id": "phc_dehu_road",
+      "medicine_id": "med_ors",
+      "current_qty": 331,
+      "avg_daily_consumption": 18.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_dehu_road_med_amoxicillin": {
+      "id": "phc_dehu_road_med_amoxicillin",
+      "phc_id": "phc_dehu_road",
+      "medicine_id": "med_amoxicillin",
+      "current_qty": 50,
+      "avg_daily_consumption": 8.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_dehu_road_med_insulin": {
+      "id": "phc_dehu_road_med_insulin",
+      "phc_id": "phc_dehu_road",
+      "medicine_id": "med_insulin",
+      "current_qty": 107,
+      "avg_daily_consumption": 4.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_dehu_road_med_iv_fluids": {
+      "id": "phc_dehu_road_med_iv_fluids",
+      "phc_id": "phc_dehu_road",
+      "medicine_id": "med_iv_fluids",
+      "current_qty": 182,
+      "avg_daily_consumption": 10.3,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_dehu_road_med_artemether": {
+      "id": "phc_dehu_road_med_artemether",
+      "phc_id": "phc_dehu_road",
+      "medicine_id": "med_artemether",
+      "current_qty": 124,
+      "avg_daily_consumption": 5.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_dehu_road_med_azithromycin": {
+      "id": "phc_dehu_road_med_azithromycin",
+      "phc_id": "phc_dehu_road",
+      "medicine_id": "med_azithromycin",
+      "current_qty": 168,
+      "avg_daily_consumption": 7.6,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_dehu_road_med_metformin": {
+      "id": "phc_dehu_road_med_metformin",
+      "phc_id": "phc_dehu_road",
+      "medicine_id": "med_metformin",
+      "current_qty": 427,
+      "avg_daily_consumption": 21.8,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_dehu_road_med_salbutamol": {
+      "id": "phc_dehu_road_med_salbutamol",
+      "phc_id": "phc_dehu_road",
+      "medicine_id": "med_salbutamol",
+      "current_qty": 92,
+      "avg_daily_consumption": 3.3,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_dehu_road_med_oxytocin": {
+      "id": "phc_dehu_road_med_oxytocin",
+      "phc_id": "phc_dehu_road",
+      "medicine_id": "med_oxytocin",
+      "current_qty": 39,
+      "avg_daily_consumption": 2.6,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_dehu_road_med_ciprofloxacin": {
+      "id": "phc_dehu_road_med_ciprofloxacin",
+      "phc_id": "phc_dehu_road",
+      "medicine_id": "med_ciprofloxacin",
+      "current_qty": 94,
+      "avg_daily_consumption": 6.1,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_dehu_road_med_cetirizine": {
+      "id": "phc_dehu_road_med_cetirizine",
+      "phc_id": "phc_dehu_road",
+      "medicine_id": "med_cetirizine",
+      "current_qty": 386,
+      "avg_daily_consumption": 15.4,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_alandi_med_paracetamol": {
+      "id": "phc_alandi_med_paracetamol",
+      "phc_id": "phc_alandi",
+      "medicine_id": "med_paracetamol",
+      "current_qty": 379,
+      "avg_daily_consumption": 25.5,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_alandi_med_ors": {
+      "id": "phc_alandi_med_ors",
+      "phc_id": "phc_alandi",
+      "medicine_id": "med_ors",
+      "current_qty": 30,
+      "avg_daily_consumption": 12.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_alandi_med_amoxicillin": {
+      "id": "phc_alandi_med_amoxicillin",
+      "phc_id": "phc_alandi",
+      "medicine_id": "med_amoxicillin",
+      "current_qty": 321,
+      "avg_daily_consumption": 15.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_alandi_med_insulin": {
+      "id": "phc_alandi_med_insulin",
+      "phc_id": "phc_alandi",
+      "medicine_id": "med_insulin",
+      "current_qty": 130,
+      "avg_daily_consumption": 5.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_alandi_med_iv_fluids": {
+      "id": "phc_alandi_med_iv_fluids",
+      "phc_id": "phc_alandi",
+      "medicine_id": "med_iv_fluids",
+      "current_qty": 204,
+      "avg_daily_consumption": 8.5,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_alandi_med_artemether": {
+      "id": "phc_alandi_med_artemether",
+      "phc_id": "phc_alandi",
+      "medicine_id": "med_artemether",
+      "current_qty": 144,
+      "avg_daily_consumption": 6.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_alandi_med_azithromycin": {
+      "id": "phc_alandi_med_azithromycin",
+      "phc_id": "phc_alandi",
+      "medicine_id": "med_azithromycin",
+      "current_qty": 176,
+      "avg_daily_consumption": 7.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_alandi_med_metformin": {
+      "id": "phc_alandi_med_metformin",
+      "phc_id": "phc_alandi",
+      "medicine_id": "med_metformin",
+      "current_qty": 323,
+      "avg_daily_consumption": 16.1,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_alandi_med_salbutamol": {
+      "id": "phc_alandi_med_salbutamol",
+      "phc_id": "phc_alandi",
+      "medicine_id": "med_salbutamol",
+      "current_qty": 98,
+      "avg_daily_consumption": 3.6,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_alandi_med_oxytocin": {
+      "id": "phc_alandi_med_oxytocin",
+      "phc_id": "phc_alandi",
+      "medicine_id": "med_oxytocin",
+      "current_qty": 53,
+      "avg_daily_consumption": 3.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_alandi_med_ciprofloxacin": {
+      "id": "phc_alandi_med_ciprofloxacin",
+      "phc_id": "phc_alandi",
+      "medicine_id": "med_ciprofloxacin",
+      "current_qty": 122,
+      "avg_daily_consumption": 7.4,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_alandi_med_cetirizine": {
+      "id": "phc_alandi_med_cetirizine",
+      "phc_id": "phc_alandi",
+      "medicine_id": "med_cetirizine",
+      "current_qty": 445,
+      "avg_daily_consumption": 17.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_khed_med_paracetamol": {
+      "id": "phc_khed_med_paracetamol",
+      "phc_id": "phc_khed",
+      "medicine_id": "med_paracetamol",
+      "current_qty": 555,
+      "avg_daily_consumption": 24.2,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_khed_med_ors": {
+      "id": "phc_khed_med_ors",
+      "phc_id": "phc_khed",
+      "medicine_id": "med_ors",
+      "current_qty": 520,
+      "avg_daily_consumption": 15.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_khed_med_amoxicillin": {
+      "id": "phc_khed_med_amoxicillin",
+      "phc_id": "phc_khed",
+      "medicine_id": "med_amoxicillin",
+      "current_qty": 268,
+      "avg_daily_consumption": 10.9,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_khed_med_insulin": {
+      "id": "phc_khed_med_insulin",
+      "phc_id": "phc_khed",
+      "medicine_id": "med_insulin",
+      "current_qty": 107,
+      "avg_daily_consumption": 4.3,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_khed_med_iv_fluids": {
+      "id": "phc_khed_med_iv_fluids",
+      "phc_id": "phc_khed",
+      "medicine_id": "med_iv_fluids",
+      "current_qty": 148,
+      "avg_daily_consumption": 10.6,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_khed_med_artemether": {
+      "id": "phc_khed_med_artemether",
+      "phc_id": "phc_khed",
+      "medicine_id": "med_artemether",
+      "current_qty": 84,
+      "avg_daily_consumption": 5.9,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_khed_med_azithromycin": {
+      "id": "phc_khed_med_azithromycin",
+      "phc_id": "phc_khed",
+      "medicine_id": "med_azithromycin",
+      "current_qty": 257,
+      "avg_daily_consumption": 9.8,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_khed_med_metformin": {
+      "id": "phc_khed_med_metformin",
+      "phc_id": "phc_khed",
+      "medicine_id": "med_metformin",
+      "current_qty": 389,
+      "avg_daily_consumption": 21.3,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_khed_med_salbutamol": {
+      "id": "phc_khed_med_salbutamol",
+      "phc_id": "phc_khed",
+      "medicine_id": "med_salbutamol",
+      "current_qty": 81,
+      "avg_daily_consumption": 3.1,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_khed_med_oxytocin": {
+      "id": "phc_khed_med_oxytocin",
+      "phc_id": "phc_khed",
+      "medicine_id": "med_oxytocin",
+      "current_qty": 47,
+      "avg_daily_consumption": 3.1,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_khed_med_ciprofloxacin": {
+      "id": "phc_khed_med_ciprofloxacin",
+      "phc_id": "phc_khed",
+      "medicine_id": "med_ciprofloxacin",
+      "current_qty": 109,
+      "avg_daily_consumption": 7.3,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_khed_med_cetirizine": {
+      "id": "phc_khed_med_cetirizine",
+      "phc_id": "phc_khed",
+      "medicine_id": "med_cetirizine",
+      "current_qty": 400,
+      "avg_daily_consumption": 16.2,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_shirur_med_paracetamol": {
+      "id": "phc_shirur_med_paracetamol",
+      "phc_id": "phc_shirur",
+      "medicine_id": "med_paracetamol",
+      "current_qty": 464,
+      "avg_daily_consumption": 22.5,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_shirur_med_ors": {
+      "id": "phc_shirur_med_ors",
+      "phc_id": "phc_shirur",
+      "medicine_id": "med_ors",
+      "current_qty": 283,
+      "avg_daily_consumption": 16.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_shirur_med_amoxicillin": {
+      "id": "phc_shirur_med_amoxicillin",
+      "phc_id": "phc_shirur",
+      "medicine_id": "med_amoxicillin",
+      "current_qty": 286,
+      "avg_daily_consumption": 14.4,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_shirur_med_insulin": {
+      "id": "phc_shirur_med_insulin",
+      "phc_id": "phc_shirur",
+      "medicine_id": "med_insulin",
+      "current_qty": 79,
+      "avg_daily_consumption": 3.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_shirur_med_iv_fluids": {
+      "id": "phc_shirur_med_iv_fluids",
+      "phc_id": "phc_shirur",
+      "medicine_id": "med_iv_fluids",
+      "current_qty": 191,
+      "avg_daily_consumption": 11.4,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_shirur_med_artemether": {
+      "id": "phc_shirur_med_artemether",
+      "phc_id": "phc_shirur",
+      "medicine_id": "med_artemether",
+      "current_qty": 162,
+      "avg_daily_consumption": 5.8,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_shirur_med_azithromycin": {
+      "id": "phc_shirur_med_azithromycin",
+      "phc_id": "phc_shirur",
+      "medicine_id": "med_azithromycin",
+      "current_qty": 179,
+      "avg_daily_consumption": 8.9,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_shirur_med_metformin": {
+      "id": "phc_shirur_med_metformin",
+      "phc_id": "phc_shirur",
+      "medicine_id": "med_metformin",
+      "current_qty": 298,
+      "avg_daily_consumption": 19.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_shirur_med_salbutamol": {
+      "id": "phc_shirur_med_salbutamol",
+      "phc_id": "phc_shirur",
+      "medicine_id": "med_salbutamol",
+      "current_qty": 61,
+      "avg_daily_consumption": 3.3,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_shirur_med_oxytocin": {
+      "id": "phc_shirur_med_oxytocin",
+      "phc_id": "phc_shirur",
+      "medicine_id": "med_oxytocin",
+      "current_qty": 15,
+      "avg_daily_consumption": 2.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_shirur_med_ciprofloxacin": {
+      "id": "phc_shirur_med_ciprofloxacin",
+      "phc_id": "phc_shirur",
+      "medicine_id": "med_ciprofloxacin",
+      "current_qty": 112,
+      "avg_daily_consumption": 6.6,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_shirur_med_cetirizine": {
+      "id": "phc_shirur_med_cetirizine",
+      "phc_id": "phc_shirur",
+      "medicine_id": "med_cetirizine",
+      "current_qty": 280,
+      "avg_daily_consumption": 12.3,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_junnar_med_paracetamol": {
+      "id": "phc_junnar_med_paracetamol",
+      "phc_id": "phc_junnar",
+      "medicine_id": "med_paracetamol",
+      "current_qty": 626,
+      "avg_daily_consumption": 23.5,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_junnar_med_ors": {
+      "id": "phc_junnar_med_ors",
+      "phc_id": "phc_junnar",
+      "medicine_id": "med_ors",
+      "current_qty": 268,
+      "avg_daily_consumption": 17.9,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_junnar_med_amoxicillin": {
+      "id": "phc_junnar_med_amoxicillin",
+      "phc_id": "phc_junnar",
+      "medicine_id": "med_amoxicillin",
+      "current_qty": 264,
+      "avg_daily_consumption": 11.3,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_junnar_med_insulin": {
+      "id": "phc_junnar_med_insulin",
+      "phc_id": "phc_junnar",
+      "medicine_id": "med_insulin",
+      "current_qty": 58,
+      "avg_daily_consumption": 3.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_junnar_med_iv_fluids": {
+      "id": "phc_junnar_med_iv_fluids",
+      "phc_id": "phc_junnar",
+      "medicine_id": "med_iv_fluids",
+      "current_qty": 268,
+      "avg_daily_consumption": 12.2,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_junnar_med_artemether": {
+      "id": "phc_junnar_med_artemether",
+      "phc_id": "phc_junnar",
+      "medicine_id": "med_artemether",
+      "current_qty": 154,
+      "avg_daily_consumption": 6.2,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_junnar_med_azithromycin": {
+      "id": "phc_junnar_med_azithromycin",
+      "phc_id": "phc_junnar",
+      "medicine_id": "med_azithromycin",
+      "current_qty": 156,
+      "avg_daily_consumption": 9.4,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_junnar_med_metformin": {
+      "id": "phc_junnar_med_metformin",
+      "phc_id": "phc_junnar",
+      "medicine_id": "med_metformin",
+      "current_qty": 320,
+      "avg_daily_consumption": 16.0,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_junnar_med_salbutamol": {
+      "id": "phc_junnar_med_salbutamol",
+      "phc_id": "phc_junnar",
+      "medicine_id": "med_salbutamol",
+      "current_qty": 73,
+      "avg_daily_consumption": 3.6,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_junnar_med_oxytocin": {
+      "id": "phc_junnar_med_oxytocin",
+      "phc_id": "phc_junnar",
+      "medicine_id": "med_oxytocin",
+      "current_qty": 67,
+      "avg_daily_consumption": 2.9,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_junnar_med_ciprofloxacin": {
+      "id": "phc_junnar_med_ciprofloxacin",
+      "phc_id": "phc_junnar",
+      "medicine_id": "med_ciprofloxacin",
+      "current_qty": 133,
+      "avg_daily_consumption": 8.7,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    },
+    "phc_junnar_med_cetirizine": {
+      "id": "phc_junnar_med_cetirizine",
+      "phc_id": "phc_junnar",
+      "medicine_id": "med_cetirizine",
+      "current_qty": 266,
+      "avg_daily_consumption": 14.2,
+      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+    }
+  },
+  "footfall": {
+    "phc_kiwale_2026-09-06": {
+      "id": "phc_kiwale_2026-09-06",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-06",
+      "patient_count": 58
+    },
+    "phc_kiwale_2026-09-07": {
+      "id": "phc_kiwale_2026-09-07",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-07",
+      "patient_count": 73
+    },
+    "phc_kiwale_2026-09-08": {
+      "id": "phc_kiwale_2026-09-08",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-08",
+      "patient_count": 72
+    },
+    "phc_kiwale_2026-09-09": {
+      "id": "phc_kiwale_2026-09-09",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-09",
+      "patient_count": 80
+    },
+    "phc_kiwale_2026-09-10": {
+      "id": "phc_kiwale_2026-09-10",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-10",
+      "patient_count": 79
+    },
+    "phc_kiwale_2026-09-11": {
+      "id": "phc_kiwale_2026-09-11",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-11",
+      "patient_count": 74
+    },
+    "phc_kiwale_2026-09-12": {
+      "id": "phc_kiwale_2026-09-12",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-12",
+      "patient_count": 45
+    },
+    "phc_kiwale_2026-09-13": {
+      "id": "phc_kiwale_2026-09-13",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-13",
+      "patient_count": 50
+    },
+    "phc_kiwale_2026-09-14": {
+      "id": "phc_kiwale_2026-09-14",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-14",
+      "patient_count": 69
+    },
+    "phc_kiwale_2026-09-15": {
+      "id": "phc_kiwale_2026-09-15",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-15",
+      "patient_count": 87
+    },
+    "phc_kiwale_2026-09-16": {
+      "id": "phc_kiwale_2026-09-16",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-16",
+      "patient_count": 93
+    },
+    "phc_kiwale_2026-09-17": {
+      "id": "phc_kiwale_2026-09-17",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-17",
+      "patient_count": 68
+    },
+    "phc_kiwale_2026-09-18": {
+      "id": "phc_kiwale_2026-09-18",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-18",
+      "patient_count": 71
+    },
+    "phc_kiwale_2026-09-19": {
+      "id": "phc_kiwale_2026-09-19",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-19",
+      "patient_count": 50
+    },
+    "phc_kiwale_2026-09-20": {
+      "id": "phc_kiwale_2026-09-20",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-20",
+      "patient_count": 44
+    },
+    "phc_kiwale_2026-09-21": {
+      "id": "phc_kiwale_2026-09-21",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-21",
+      "patient_count": 95
+    },
+    "phc_kiwale_2026-09-22": {
+      "id": "phc_kiwale_2026-09-22",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-22",
+      "patient_count": 71
+    },
+    "phc_kiwale_2026-09-23": {
+      "id": "phc_kiwale_2026-09-23",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-23",
+      "patient_count": 66
+    },
+    "phc_kiwale_2026-09-24": {
+      "id": "phc_kiwale_2026-09-24",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-24",
+      "patient_count": 74
+    },
+    "phc_kiwale_2026-09-25": {
+      "id": "phc_kiwale_2026-09-25",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-25",
+      "patient_count": 75
+    },
+    "phc_kiwale_2026-09-26": {
+      "id": "phc_kiwale_2026-09-26",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-26",
+      "patient_count": 55
+    },
+    "phc_kiwale_2026-09-27": {
+      "id": "phc_kiwale_2026-09-27",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-27",
+      "patient_count": 54
+    },
+    "phc_talegaon_2026-09-06": {
+      "id": "phc_talegaon_2026-09-06",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-06",
+      "patient_count": 43
+    },
+    "phc_talegaon_2026-09-07": {
+      "id": "phc_talegaon_2026-09-07",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-07",
+      "patient_count": 75
+    },
+    "phc_talegaon_2026-09-08": {
+      "id": "phc_talegaon_2026-09-08",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-08",
+      "patient_count": 97
+    },
+    "phc_talegaon_2026-09-09": {
+      "id": "phc_talegaon_2026-09-09",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-09",
+      "patient_count": 85
+    },
+    "phc_talegaon_2026-09-10": {
+      "id": "phc_talegaon_2026-09-10",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-10",
+      "patient_count": 67
+    },
+    "phc_talegaon_2026-09-11": {
+      "id": "phc_talegaon_2026-09-11",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-11",
+      "patient_count": 67
+    },
+    "phc_talegaon_2026-09-12": {
+      "id": "phc_talegaon_2026-09-12",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-12",
+      "patient_count": 52
+    },
+    "phc_talegaon_2026-09-13": {
+      "id": "phc_talegaon_2026-09-13",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-13",
+      "patient_count": 51
+    },
+    "phc_talegaon_2026-09-14": {
+      "id": "phc_talegaon_2026-09-14",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-14",
+      "patient_count": 71
+    },
+    "phc_talegaon_2026-09-15": {
+      "id": "phc_talegaon_2026-09-15",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-15",
+      "patient_count": 97
+    },
+    "phc_talegaon_2026-09-16": {
+      "id": "phc_talegaon_2026-09-16",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-16",
+      "patient_count": 68
+    },
+    "phc_talegaon_2026-09-17": {
+      "id": "phc_talegaon_2026-09-17",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-17",
+      "patient_count": 68
+    },
+    "phc_talegaon_2026-09-18": {
+      "id": "phc_talegaon_2026-09-18",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-18",
+      "patient_count": 68
+    },
+    "phc_talegaon_2026-09-19": {
+      "id": "phc_talegaon_2026-09-19",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-19",
+      "patient_count": 48
+    },
+    "phc_talegaon_2026-09-20": {
+      "id": "phc_talegaon_2026-09-20",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-20",
+      "patient_count": 60
+    },
+    "phc_talegaon_2026-09-21": {
+      "id": "phc_talegaon_2026-09-21",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-21",
+      "patient_count": 73
+    },
+    "phc_talegaon_2026-09-22": {
+      "id": "phc_talegaon_2026-09-22",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-22",
+      "patient_count": 86
+    },
+    "phc_talegaon_2026-09-23": {
+      "id": "phc_talegaon_2026-09-23",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-23",
+      "patient_count": 86
+    },
+    "phc_talegaon_2026-09-24": {
+      "id": "phc_talegaon_2026-09-24",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-24",
+      "patient_count": 79
+    },
+    "phc_talegaon_2026-09-25": {
+      "id": "phc_talegaon_2026-09-25",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-25",
+      "patient_count": 85
+    },
+    "phc_talegaon_2026-09-26": {
+      "id": "phc_talegaon_2026-09-26",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-26",
+      "patient_count": 47
+    },
+    "phc_talegaon_2026-09-27": {
+      "id": "phc_talegaon_2026-09-27",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-27",
+      "patient_count": 44
+    },
+    "phc_chikhli_2026-09-06": {
+      "id": "phc_chikhli_2026-09-06",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-06",
+      "patient_count": 45
+    },
+    "phc_chikhli_2026-09-07": {
+      "id": "phc_chikhli_2026-09-07",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-07",
+      "patient_count": 78
+    },
+    "phc_chikhli_2026-09-08": {
+      "id": "phc_chikhli_2026-09-08",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-08",
+      "patient_count": 88
+    },
+    "phc_chikhli_2026-09-09": {
+      "id": "phc_chikhli_2026-09-09",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-09",
+      "patient_count": 80
+    },
+    "phc_chikhli_2026-09-10": {
+      "id": "phc_chikhli_2026-09-10",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-10",
+      "patient_count": 96
+    },
+    "phc_chikhli_2026-09-11": {
+      "id": "phc_chikhli_2026-09-11",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-11",
+      "patient_count": 66
+    },
+    "phc_chikhli_2026-09-12": {
+      "id": "phc_chikhli_2026-09-12",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-12",
+      "patient_count": 53
+    },
+    "phc_chikhli_2026-09-13": {
+      "id": "phc_chikhli_2026-09-13",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-13",
+      "patient_count": 42
+    },
+    "phc_chikhli_2026-09-14": {
+      "id": "phc_chikhli_2026-09-14",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-14",
+      "patient_count": 84
+    },
+    "phc_chikhli_2026-09-15": {
+      "id": "phc_chikhli_2026-09-15",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-15",
+      "patient_count": 82
+    },
+    "phc_chikhli_2026-09-16": {
+      "id": "phc_chikhli_2026-09-16",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-16",
+      "patient_count": 70
+    },
+    "phc_chikhli_2026-09-17": {
+      "id": "phc_chikhli_2026-09-17",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-17",
+      "patient_count": 95
+    },
+    "phc_chikhli_2026-09-18": {
+      "id": "phc_chikhli_2026-09-18",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-18",
+      "patient_count": 95
+    },
+    "phc_chikhli_2026-09-19": {
+      "id": "phc_chikhli_2026-09-19",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-19",
+      "patient_count": 48
+    },
+    "phc_chikhli_2026-09-20": {
+      "id": "phc_chikhli_2026-09-20",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-20",
+      "patient_count": 44
+    },
+    "phc_chikhli_2026-09-21": {
+      "id": "phc_chikhli_2026-09-21",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-21",
+      "patient_count": 93
+    },
+    "phc_chikhli_2026-09-22": {
+      "id": "phc_chikhli_2026-09-22",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-22",
+      "patient_count": 89
+    },
+    "phc_chikhli_2026-09-23": {
+      "id": "phc_chikhli_2026-09-23",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-23",
+      "patient_count": 86
+    },
+    "phc_chikhli_2026-09-24": {
+      "id": "phc_chikhli_2026-09-24",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-24",
+      "patient_count": 66
+    },
+    "phc_chikhli_2026-09-25": {
+      "id": "phc_chikhli_2026-09-25",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-25",
+      "patient_count": 75
+    },
+    "phc_chikhli_2026-09-26": {
+      "id": "phc_chikhli_2026-09-26",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-26",
+      "patient_count": 60
+    },
+    "phc_chikhli_2026-09-27": {
+      "id": "phc_chikhli_2026-09-27",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-27",
+      "patient_count": 46
+    },
+    "phc_dehu_road_2026-09-06": {
+      "id": "phc_dehu_road_2026-09-06",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-06",
+      "patient_count": 59
+    },
+    "phc_dehu_road_2026-09-07": {
+      "id": "phc_dehu_road_2026-09-07",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-07",
+      "patient_count": 90
+    },
+    "phc_dehu_road_2026-09-08": {
+      "id": "phc_dehu_road_2026-09-08",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-08",
+      "patient_count": 70
+    },
+    "phc_dehu_road_2026-09-09": {
+      "id": "phc_dehu_road_2026-09-09",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-09",
+      "patient_count": 75
+    },
+    "phc_dehu_road_2026-09-10": {
+      "id": "phc_dehu_road_2026-09-10",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-10",
+      "patient_count": 72
+    },
+    "phc_dehu_road_2026-09-11": {
+      "id": "phc_dehu_road_2026-09-11",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-11",
+      "patient_count": 72
+    },
+    "phc_dehu_road_2026-09-12": {
+      "id": "phc_dehu_road_2026-09-12",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-12",
+      "patient_count": 51
+    },
+    "phc_dehu_road_2026-09-13": {
+      "id": "phc_dehu_road_2026-09-13",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-13",
+      "patient_count": 46
+    },
+    "phc_dehu_road_2026-09-14": {
+      "id": "phc_dehu_road_2026-09-14",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-14",
+      "patient_count": 68
+    },
+    "phc_dehu_road_2026-09-15": {
+      "id": "phc_dehu_road_2026-09-15",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-15",
+      "patient_count": 93
+    },
+    "phc_dehu_road_2026-09-16": {
+      "id": "phc_dehu_road_2026-09-16",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-16",
+      "patient_count": 67
+    },
+    "phc_dehu_road_2026-09-17": {
+      "id": "phc_dehu_road_2026-09-17",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-17",
+      "patient_count": 76
+    },
+    "phc_dehu_road_2026-09-18": {
+      "id": "phc_dehu_road_2026-09-18",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-18",
+      "patient_count": 87
+    },
+    "phc_dehu_road_2026-09-19": {
+      "id": "phc_dehu_road_2026-09-19",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-19",
+      "patient_count": 44
+    },
+    "phc_dehu_road_2026-09-20": {
+      "id": "phc_dehu_road_2026-09-20",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-20",
+      "patient_count": 52
+    },
+    "phc_dehu_road_2026-09-21": {
+      "id": "phc_dehu_road_2026-09-21",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-21",
+      "patient_count": 84
+    },
+    "phc_dehu_road_2026-09-22": {
+      "id": "phc_dehu_road_2026-09-22",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-22",
+      "patient_count": 69
+    },
+    "phc_dehu_road_2026-09-23": {
+      "id": "phc_dehu_road_2026-09-23",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-23",
+      "patient_count": 97
+    },
+    "phc_dehu_road_2026-09-24": {
+      "id": "phc_dehu_road_2026-09-24",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-24",
+      "patient_count": 84
+    },
+    "phc_dehu_road_2026-09-25": {
+      "id": "phc_dehu_road_2026-09-25",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-25",
+      "patient_count": 93
+    },
+    "phc_dehu_road_2026-09-26": {
+      "id": "phc_dehu_road_2026-09-26",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-26",
+      "patient_count": 52
+    },
+    "phc_dehu_road_2026-09-27": {
+      "id": "phc_dehu_road_2026-09-27",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-27",
+      "patient_count": 43
+    },
+    "phc_alandi_2026-09-06": {
+      "id": "phc_alandi_2026-09-06",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-06",
+      "patient_count": 33
+    },
+    "phc_alandi_2026-09-07": {
+      "id": "phc_alandi_2026-09-07",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-07",
+      "patient_count": 59
+    },
+    "phc_alandi_2026-09-08": {
+      "id": "phc_alandi_2026-09-08",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-08",
+      "patient_count": 79
+    },
+    "phc_alandi_2026-09-09": {
+      "id": "phc_alandi_2026-09-09",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-09",
+      "patient_count": 79
+    },
+    "phc_alandi_2026-09-10": {
+      "id": "phc_alandi_2026-09-10",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-10",
+      "patient_count": 56
+    },
+    "phc_alandi_2026-09-11": {
+      "id": "phc_alandi_2026-09-11",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-11",
+      "patient_count": 72
+    },
+    "phc_alandi_2026-09-12": {
+      "id": "phc_alandi_2026-09-12",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-12",
+      "patient_count": 38
+    },
+    "phc_alandi_2026-09-13": {
+      "id": "phc_alandi_2026-09-13",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-13",
+      "patient_count": 49
+    },
+    "phc_alandi_2026-09-14": {
+      "id": "phc_alandi_2026-09-14",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-14",
+      "patient_count": 70
+    },
+    "phc_alandi_2026-09-15": {
+      "id": "phc_alandi_2026-09-15",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-15",
+      "patient_count": 80
+    },
+    "phc_alandi_2026-09-16": {
+      "id": "phc_alandi_2026-09-16",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-16",
+      "patient_count": 78
+    },
+    "phc_alandi_2026-09-17": {
+      "id": "phc_alandi_2026-09-17",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-17",
+      "patient_count": 76
+    },
+    "phc_alandi_2026-09-18": {
+      "id": "phc_alandi_2026-09-18",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-18",
+      "patient_count": 79
+    },
+    "phc_alandi_2026-09-19": {
+      "id": "phc_alandi_2026-09-19",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-19",
+      "patient_count": 31
+    },
+    "phc_alandi_2026-09-20": {
+      "id": "phc_alandi_2026-09-20",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-20",
+      "patient_count": 46
+    },
+    "phc_alandi_2026-09-21": {
+      "id": "phc_alandi_2026-09-21",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-21",
+      "patient_count": 76
+    },
+    "phc_alandi_2026-09-22": {
+      "id": "phc_alandi_2026-09-22",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-22",
+      "patient_count": 76
+    },
+    "phc_alandi_2026-09-23": {
+      "id": "phc_alandi_2026-09-23",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-23",
+      "patient_count": 58
+    },
+    "phc_alandi_2026-09-24": {
+      "id": "phc_alandi_2026-09-24",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-24",
+      "patient_count": 76
+    },
+    "phc_alandi_2026-09-25": {
+      "id": "phc_alandi_2026-09-25",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-25",
+      "patient_count": 63
+    },
+    "phc_alandi_2026-09-26": {
+      "id": "phc_alandi_2026-09-26",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-26",
+      "patient_count": 48
+    },
+    "phc_alandi_2026-09-27": {
+      "id": "phc_alandi_2026-09-27",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-27",
+      "patient_count": 35
+    },
+    "phc_khed_2026-09-06": {
+      "id": "phc_khed_2026-09-06",
+      "phc_id": "phc_khed",
+      "date": "2026-09-06",
+      "patient_count": 48
+    },
+    "phc_khed_2026-09-07": {
+      "id": "phc_khed_2026-09-07",
+      "phc_id": "phc_khed",
+      "date": "2026-09-07",
+      "patient_count": 61
+    },
+    "phc_khed_2026-09-08": {
+      "id": "phc_khed_2026-09-08",
+      "phc_id": "phc_khed",
+      "date": "2026-09-08",
+      "patient_count": 77
+    },
+    "phc_khed_2026-09-09": {
+      "id": "phc_khed_2026-09-09",
+      "phc_id": "phc_khed",
+      "date": "2026-09-09",
+      "patient_count": 57
+    },
+    "phc_khed_2026-09-10": {
+      "id": "phc_khed_2026-09-10",
+      "phc_id": "phc_khed",
+      "date": "2026-09-10",
+      "patient_count": 72
+    },
+    "phc_khed_2026-09-11": {
+      "id": "phc_khed_2026-09-11",
+      "phc_id": "phc_khed",
+      "date": "2026-09-11",
+      "patient_count": 63
+    },
+    "phc_khed_2026-09-12": {
+      "id": "phc_khed_2026-09-12",
+      "phc_id": "phc_khed",
+      "date": "2026-09-12",
+      "patient_count": 36
+    },
+    "phc_khed_2026-09-13": {
+      "id": "phc_khed_2026-09-13",
+      "phc_id": "phc_khed",
+      "date": "2026-09-13",
+      "patient_count": 50
+    },
+    "phc_khed_2026-09-14": {
+      "id": "phc_khed_2026-09-14",
+      "phc_id": "phc_khed",
+      "date": "2026-09-14",
+      "patient_count": 61
+    },
+    "phc_khed_2026-09-15": {
+      "id": "phc_khed_2026-09-15",
+      "phc_id": "phc_khed",
+      "date": "2026-09-15",
+      "patient_count": 63
+    },
+    "phc_khed_2026-09-16": {
+      "id": "phc_khed_2026-09-16",
+      "phc_id": "phc_khed",
+      "date": "2026-09-16",
+      "patient_count": 60
+    },
+    "phc_khed_2026-09-17": {
+      "id": "phc_khed_2026-09-17",
+      "phc_id": "phc_khed",
+      "date": "2026-09-17",
+      "patient_count": 53
+    },
+    "phc_khed_2026-09-18": {
+      "id": "phc_khed_2026-09-18",
+      "phc_id": "phc_khed",
+      "date": "2026-09-18",
+      "patient_count": 55
+    },
+    "phc_khed_2026-09-19": {
+      "id": "phc_khed_2026-09-19",
+      "phc_id": "phc_khed",
+      "date": "2026-09-19",
+      "patient_count": 50
+    },
+    "phc_khed_2026-09-20": {
+      "id": "phc_khed_2026-09-20",
+      "phc_id": "phc_khed",
+      "date": "2026-09-20",
+      "patient_count": 31
+    },
+    "phc_khed_2026-09-21": {
+      "id": "phc_khed_2026-09-21",
+      "phc_id": "phc_khed",
+      "date": "2026-09-21",
+      "patient_count": 70
+    },
+    "phc_khed_2026-09-22": {
+      "id": "phc_khed_2026-09-22",
+      "phc_id": "phc_khed",
+      "date": "2026-09-22",
+      "patient_count": 61
+    },
+    "phc_khed_2026-09-23": {
+      "id": "phc_khed_2026-09-23",
+      "phc_id": "phc_khed",
+      "date": "2026-09-23",
+      "patient_count": 64
+    },
+    "phc_khed_2026-09-24": {
+      "id": "phc_khed_2026-09-24",
+      "phc_id": "phc_khed",
+      "date": "2026-09-24",
+      "patient_count": 67
+    },
+    "phc_khed_2026-09-25": {
+      "id": "phc_khed_2026-09-25",
+      "phc_id": "phc_khed",
+      "date": "2026-09-25",
+      "patient_count": 63
+    },
+    "phc_khed_2026-09-26": {
+      "id": "phc_khed_2026-09-26",
+      "phc_id": "phc_khed",
+      "date": "2026-09-26",
+      "patient_count": 35
+    },
+    "phc_khed_2026-09-27": {
+      "id": "phc_khed_2026-09-27",
+      "phc_id": "phc_khed",
+      "date": "2026-09-27",
+      "patient_count": 31
+    },
+    "phc_shirur_2026-09-06": {
+      "id": "phc_shirur_2026-09-06",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-06",
+      "patient_count": 31
+    },
+    "phc_shirur_2026-09-07": {
+      "id": "phc_shirur_2026-09-07",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-07",
+      "patient_count": 80
+    },
+    "phc_shirur_2026-09-08": {
+      "id": "phc_shirur_2026-09-08",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-08",
+      "patient_count": 72
+    },
+    "phc_shirur_2026-09-09": {
+      "id": "phc_shirur_2026-09-09",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-09",
+      "patient_count": 61
+    },
+    "phc_shirur_2026-09-10": {
+      "id": "phc_shirur_2026-09-10",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-10",
+      "patient_count": 52
+    },
+    "phc_shirur_2026-09-11": {
+      "id": "phc_shirur_2026-09-11",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-11",
+      "patient_count": 70
+    },
+    "phc_shirur_2026-09-12": {
+      "id": "phc_shirur_2026-09-12",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-12",
+      "patient_count": 44
+    },
+    "phc_shirur_2026-09-13": {
+      "id": "phc_shirur_2026-09-13",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-13",
+      "patient_count": 46
+    },
+    "phc_shirur_2026-09-14": {
+      "id": "phc_shirur_2026-09-14",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-14",
+      "patient_count": 67
+    },
+    "phc_shirur_2026-09-15": {
+      "id": "phc_shirur_2026-09-15",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-15",
+      "patient_count": 72
+    },
+    "phc_shirur_2026-09-16": {
+      "id": "phc_shirur_2026-09-16",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-16",
+      "patient_count": 60
+    },
+    "phc_shirur_2026-09-17": {
+      "id": "phc_shirur_2026-09-17",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-17",
+      "patient_count": 73
+    },
+    "phc_shirur_2026-09-18": {
+      "id": "phc_shirur_2026-09-18",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-18",
+      "patient_count": 68
+    },
+    "phc_shirur_2026-09-19": {
+      "id": "phc_shirur_2026-09-19",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-19",
+      "patient_count": 35
+    },
+    "phc_shirur_2026-09-20": {
+      "id": "phc_shirur_2026-09-20",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-20",
+      "patient_count": 44
+    },
+    "phc_shirur_2026-09-21": {
+      "id": "phc_shirur_2026-09-21",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-21",
+      "patient_count": 72
+    },
+    "phc_shirur_2026-09-22": {
+      "id": "phc_shirur_2026-09-22",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-22",
+      "patient_count": 70
+    },
+    "phc_shirur_2026-09-23": {
+      "id": "phc_shirur_2026-09-23",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-23",
+      "patient_count": 59
+    },
+    "phc_shirur_2026-09-24": {
+      "id": "phc_shirur_2026-09-24",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-24",
+      "patient_count": 68
+    },
+    "phc_shirur_2026-09-25": {
+      "id": "phc_shirur_2026-09-25",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-25",
+      "patient_count": 59
+    },
+    "phc_shirur_2026-09-26": {
+      "id": "phc_shirur_2026-09-26",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-26",
+      "patient_count": 35
+    },
+    "phc_shirur_2026-09-27": {
+      "id": "phc_shirur_2026-09-27",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-27",
+      "patient_count": 47
+    },
+    "phc_junnar_2026-09-06": {
+      "id": "phc_junnar_2026-09-06",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-06",
+      "patient_count": 43
+    },
+    "phc_junnar_2026-09-07": {
+      "id": "phc_junnar_2026-09-07",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-07",
+      "patient_count": 65
+    },
+    "phc_junnar_2026-09-08": {
+      "id": "phc_junnar_2026-09-08",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-08",
+      "patient_count": 65
+    },
+    "phc_junnar_2026-09-09": {
+      "id": "phc_junnar_2026-09-09",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-09",
+      "patient_count": 67
+    },
+    "phc_junnar_2026-09-10": {
+      "id": "phc_junnar_2026-09-10",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-10",
+      "patient_count": 76
+    },
+    "phc_junnar_2026-09-11": {
+      "id": "phc_junnar_2026-09-11",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-11",
+      "patient_count": 72
+    },
+    "phc_junnar_2026-09-12": {
+      "id": "phc_junnar_2026-09-12",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-12",
+      "patient_count": 37
+    },
+    "phc_junnar_2026-09-13": {
+      "id": "phc_junnar_2026-09-13",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-13",
+      "patient_count": 44
+    },
+    "phc_junnar_2026-09-14": {
+      "id": "phc_junnar_2026-09-14",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-14",
+      "patient_count": 60
+    },
+    "phc_junnar_2026-09-15": {
+      "id": "phc_junnar_2026-09-15",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-15",
+      "patient_count": 77
+    },
+    "phc_junnar_2026-09-16": {
+      "id": "phc_junnar_2026-09-16",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-16",
+      "patient_count": 72
+    },
+    "phc_junnar_2026-09-17": {
+      "id": "phc_junnar_2026-09-17",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-17",
+      "patient_count": 57
+    },
+    "phc_junnar_2026-09-18": {
+      "id": "phc_junnar_2026-09-18",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-18",
+      "patient_count": 54
+    },
+    "phc_junnar_2026-09-19": {
+      "id": "phc_junnar_2026-09-19",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-19",
+      "patient_count": 31
+    },
+    "phc_junnar_2026-09-20": {
+      "id": "phc_junnar_2026-09-20",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-20",
+      "patient_count": 40
+    },
+    "phc_junnar_2026-09-21": {
+      "id": "phc_junnar_2026-09-21",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-21",
+      "patient_count": 78
+    },
+    "phc_junnar_2026-09-22": {
+      "id": "phc_junnar_2026-09-22",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-22",
+      "patient_count": 65
+    },
+    "phc_junnar_2026-09-23": {
+      "id": "phc_junnar_2026-09-23",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-23",
+      "patient_count": 79
+    },
+    "phc_junnar_2026-09-24": {
+      "id": "phc_junnar_2026-09-24",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-24",
+      "patient_count": 56
+    },
+    "phc_junnar_2026-09-25": {
+      "id": "phc_junnar_2026-09-25",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-25",
+      "patient_count": 66
+    },
+    "phc_junnar_2026-09-26": {
+      "id": "phc_junnar_2026-09-26",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-26",
+      "patient_count": 35
+    },
+    "phc_junnar_2026-09-27": {
+      "id": "phc_junnar_2026-09-27",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-27",
+      "patient_count": 44
+    }
+  },
+  "staff_attendance": {
+    "phc_kiwale_2026-09-06": {
+      "id": "phc_kiwale_2026-09-06",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-06",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-07": {
+      "id": "phc_kiwale_2026-09-07",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-07",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-08": {
+      "id": "phc_kiwale_2026-09-08",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-08",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-09": {
+      "id": "phc_kiwale_2026-09-09",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-09",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-10": {
+      "id": "phc_kiwale_2026-09-10",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-10",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-11": {
+      "id": "phc_kiwale_2026-09-11",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-11",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-12": {
+      "id": "phc_kiwale_2026-09-12",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-12",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-13": {
+      "id": "phc_kiwale_2026-09-13",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-13",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-14": {
+      "id": "phc_kiwale_2026-09-14",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-14",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-15": {
+      "id": "phc_kiwale_2026-09-15",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-15",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-16": {
+      "id": "phc_kiwale_2026-09-16",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-16",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-17": {
+      "id": "phc_kiwale_2026-09-17",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-17",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-18": {
+      "id": "phc_kiwale_2026-09-18",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-18",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-19": {
+      "id": "phc_kiwale_2026-09-19",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-19",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-20": {
+      "id": "phc_kiwale_2026-09-20",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-20",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-21": {
+      "id": "phc_kiwale_2026-09-21",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-21",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-22": {
+      "id": "phc_kiwale_2026-09-22",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-22",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-23": {
+      "id": "phc_kiwale_2026-09-23",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-23",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-24": {
+      "id": "phc_kiwale_2026-09-24",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-24",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-25": {
+      "id": "phc_kiwale_2026-09-25",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-25",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-26": {
+      "id": "phc_kiwale_2026-09-26",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-26",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_kiwale_2026-09-27": {
+      "id": "phc_kiwale_2026-09-27",
+      "phc_id": "phc_kiwale",
+      "date": "2026-09-27",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-06": {
+      "id": "phc_talegaon_2026-09-06",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-06",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-07": {
+      "id": "phc_talegaon_2026-09-07",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-07",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-08": {
+      "id": "phc_talegaon_2026-09-08",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-08",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-09": {
+      "id": "phc_talegaon_2026-09-09",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-09",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-10": {
+      "id": "phc_talegaon_2026-09-10",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-10",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-11": {
+      "id": "phc_talegaon_2026-09-11",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-11",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-12": {
+      "id": "phc_talegaon_2026-09-12",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-12",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-13": {
+      "id": "phc_talegaon_2026-09-13",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-13",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-14": {
+      "id": "phc_talegaon_2026-09-14",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-14",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-15": {
+      "id": "phc_talegaon_2026-09-15",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-15",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-16": {
+      "id": "phc_talegaon_2026-09-16",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-16",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-17": {
+      "id": "phc_talegaon_2026-09-17",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-17",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-18": {
+      "id": "phc_talegaon_2026-09-18",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-18",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-19": {
+      "id": "phc_talegaon_2026-09-19",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-19",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-20": {
+      "id": "phc_talegaon_2026-09-20",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-20",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-21": {
+      "id": "phc_talegaon_2026-09-21",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-21",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-22": {
+      "id": "phc_talegaon_2026-09-22",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-22",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-23": {
+      "id": "phc_talegaon_2026-09-23",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-23",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-24": {
+      "id": "phc_talegaon_2026-09-24",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-24",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-25": {
+      "id": "phc_talegaon_2026-09-25",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-25",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-26": {
+      "id": "phc_talegaon_2026-09-26",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-26",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_talegaon_2026-09-27": {
+      "id": "phc_talegaon_2026-09-27",
+      "phc_id": "phc_talegaon",
+      "date": "2026-09-27",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-06": {
+      "id": "phc_chikhli_2026-09-06",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-06",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-07": {
+      "id": "phc_chikhli_2026-09-07",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-07",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-08": {
+      "id": "phc_chikhli_2026-09-08",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-08",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-09": {
+      "id": "phc_chikhli_2026-09-09",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-09",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-10": {
+      "id": "phc_chikhli_2026-09-10",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-10",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-11": {
+      "id": "phc_chikhli_2026-09-11",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-11",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-12": {
+      "id": "phc_chikhli_2026-09-12",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-12",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-13": {
+      "id": "phc_chikhli_2026-09-13",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-13",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-14": {
+      "id": "phc_chikhli_2026-09-14",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-14",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-15": {
+      "id": "phc_chikhli_2026-09-15",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-15",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-16": {
+      "id": "phc_chikhli_2026-09-16",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-16",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-17": {
+      "id": "phc_chikhli_2026-09-17",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-17",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-18": {
+      "id": "phc_chikhli_2026-09-18",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-18",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-19": {
+      "id": "phc_chikhli_2026-09-19",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-19",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-20": {
+      "id": "phc_chikhli_2026-09-20",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-20",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-21": {
+      "id": "phc_chikhli_2026-09-21",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-21",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-22": {
+      "id": "phc_chikhli_2026-09-22",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-22",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-23": {
+      "id": "phc_chikhli_2026-09-23",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-23",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-24": {
+      "id": "phc_chikhli_2026-09-24",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-24",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-25": {
+      "id": "phc_chikhli_2026-09-25",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-25",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-26": {
+      "id": "phc_chikhli_2026-09-26",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-26",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_chikhli_2026-09-27": {
+      "id": "phc_chikhli_2026-09-27",
+      "phc_id": "phc_chikhli",
+      "date": "2026-09-27",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-06": {
+      "id": "phc_dehu_road_2026-09-06",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-06",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-07": {
+      "id": "phc_dehu_road_2026-09-07",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-07",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-08": {
+      "id": "phc_dehu_road_2026-09-08",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-08",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-09": {
+      "id": "phc_dehu_road_2026-09-09",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-09",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-10": {
+      "id": "phc_dehu_road_2026-09-10",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-10",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-11": {
+      "id": "phc_dehu_road_2026-09-11",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-11",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-12": {
+      "id": "phc_dehu_road_2026-09-12",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-12",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-13": {
+      "id": "phc_dehu_road_2026-09-13",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-13",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-14": {
+      "id": "phc_dehu_road_2026-09-14",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-14",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-15": {
+      "id": "phc_dehu_road_2026-09-15",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-15",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-16": {
+      "id": "phc_dehu_road_2026-09-16",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-16",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-17": {
+      "id": "phc_dehu_road_2026-09-17",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-17",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-18": {
+      "id": "phc_dehu_road_2026-09-18",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-18",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-19": {
+      "id": "phc_dehu_road_2026-09-19",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-19",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-20": {
+      "id": "phc_dehu_road_2026-09-20",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-20",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-21": {
+      "id": "phc_dehu_road_2026-09-21",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-21",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-22": {
+      "id": "phc_dehu_road_2026-09-22",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-22",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-23": {
+      "id": "phc_dehu_road_2026-09-23",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-23",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-24": {
+      "id": "phc_dehu_road_2026-09-24",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-24",
+      "present_count": 14,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-25": {
+      "id": "phc_dehu_road_2026-09-25",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-25",
+      "present_count": 13,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-26": {
+      "id": "phc_dehu_road_2026-09-26",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-26",
+      "present_count": 11,
+      "total_staff": 14
+    },
+    "phc_dehu_road_2026-09-27": {
+      "id": "phc_dehu_road_2026-09-27",
+      "phc_id": "phc_dehu_road",
+      "date": "2026-09-27",
+      "present_count": 12,
+      "total_staff": 14
+    },
+    "phc_alandi_2026-09-06": {
+      "id": "phc_alandi_2026-09-06",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-06",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-07": {
+      "id": "phc_alandi_2026-09-07",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-07",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-08": {
+      "id": "phc_alandi_2026-09-08",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-08",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-09": {
+      "id": "phc_alandi_2026-09-09",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-09",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-10": {
+      "id": "phc_alandi_2026-09-10",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-10",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-11": {
+      "id": "phc_alandi_2026-09-11",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-11",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-12": {
+      "id": "phc_alandi_2026-09-12",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-12",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-13": {
+      "id": "phc_alandi_2026-09-13",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-13",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-14": {
+      "id": "phc_alandi_2026-09-14",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-14",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-15": {
+      "id": "phc_alandi_2026-09-15",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-15",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-16": {
+      "id": "phc_alandi_2026-09-16",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-16",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-17": {
+      "id": "phc_alandi_2026-09-17",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-17",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-18": {
+      "id": "phc_alandi_2026-09-18",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-18",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-19": {
+      "id": "phc_alandi_2026-09-19",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-19",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-20": {
+      "id": "phc_alandi_2026-09-20",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-20",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-21": {
+      "id": "phc_alandi_2026-09-21",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-21",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-22": {
+      "id": "phc_alandi_2026-09-22",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-22",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-23": {
+      "id": "phc_alandi_2026-09-23",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-23",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-24": {
+      "id": "phc_alandi_2026-09-24",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-24",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-25": {
+      "id": "phc_alandi_2026-09-25",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-25",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-26": {
+      "id": "phc_alandi_2026-09-26",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-26",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_alandi_2026-09-27": {
+      "id": "phc_alandi_2026-09-27",
+      "phc_id": "phc_alandi",
+      "date": "2026-09-27",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-06": {
+      "id": "phc_khed_2026-09-06",
+      "phc_id": "phc_khed",
+      "date": "2026-09-06",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-07": {
+      "id": "phc_khed_2026-09-07",
+      "phc_id": "phc_khed",
+      "date": "2026-09-07",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-08": {
+      "id": "phc_khed_2026-09-08",
+      "phc_id": "phc_khed",
+      "date": "2026-09-08",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-09": {
+      "id": "phc_khed_2026-09-09",
+      "phc_id": "phc_khed",
+      "date": "2026-09-09",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-10": {
+      "id": "phc_khed_2026-09-10",
+      "phc_id": "phc_khed",
+      "date": "2026-09-10",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-11": {
+      "id": "phc_khed_2026-09-11",
+      "phc_id": "phc_khed",
+      "date": "2026-09-11",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-12": {
+      "id": "phc_khed_2026-09-12",
+      "phc_id": "phc_khed",
+      "date": "2026-09-12",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-13": {
+      "id": "phc_khed_2026-09-13",
+      "phc_id": "phc_khed",
+      "date": "2026-09-13",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-14": {
+      "id": "phc_khed_2026-09-14",
+      "phc_id": "phc_khed",
+      "date": "2026-09-14",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-15": {
+      "id": "phc_khed_2026-09-15",
+      "phc_id": "phc_khed",
+      "date": "2026-09-15",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-16": {
+      "id": "phc_khed_2026-09-16",
+      "phc_id": "phc_khed",
+      "date": "2026-09-16",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-17": {
+      "id": "phc_khed_2026-09-17",
+      "phc_id": "phc_khed",
+      "date": "2026-09-17",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-18": {
+      "id": "phc_khed_2026-09-18",
+      "phc_id": "phc_khed",
+      "date": "2026-09-18",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-19": {
+      "id": "phc_khed_2026-09-19",
+      "phc_id": "phc_khed",
+      "date": "2026-09-19",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-20": {
+      "id": "phc_khed_2026-09-20",
+      "phc_id": "phc_khed",
+      "date": "2026-09-20",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-21": {
+      "id": "phc_khed_2026-09-21",
+      "phc_id": "phc_khed",
+      "date": "2026-09-21",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-22": {
+      "id": "phc_khed_2026-09-22",
+      "phc_id": "phc_khed",
+      "date": "2026-09-22",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-23": {
+      "id": "phc_khed_2026-09-23",
+      "phc_id": "phc_khed",
+      "date": "2026-09-23",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-24": {
+      "id": "phc_khed_2026-09-24",
+      "phc_id": "phc_khed",
+      "date": "2026-09-24",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-25": {
+      "id": "phc_khed_2026-09-25",
+      "phc_id": "phc_khed",
+      "date": "2026-09-25",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-26": {
+      "id": "phc_khed_2026-09-26",
+      "phc_id": "phc_khed",
+      "date": "2026-09-26",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_khed_2026-09-27": {
+      "id": "phc_khed_2026-09-27",
+      "phc_id": "phc_khed",
+      "date": "2026-09-27",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-06": {
+      "id": "phc_shirur_2026-09-06",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-06",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-07": {
+      "id": "phc_shirur_2026-09-07",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-07",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-08": {
+      "id": "phc_shirur_2026-09-08",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-08",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-09": {
+      "id": "phc_shirur_2026-09-09",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-09",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-10": {
+      "id": "phc_shirur_2026-09-10",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-10",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-11": {
+      "id": "phc_shirur_2026-09-11",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-11",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-12": {
+      "id": "phc_shirur_2026-09-12",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-12",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-13": {
+      "id": "phc_shirur_2026-09-13",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-13",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-14": {
+      "id": "phc_shirur_2026-09-14",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-14",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-15": {
+      "id": "phc_shirur_2026-09-15",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-15",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-16": {
+      "id": "phc_shirur_2026-09-16",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-16",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-17": {
+      "id": "phc_shirur_2026-09-17",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-17",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-18": {
+      "id": "phc_shirur_2026-09-18",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-18",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-19": {
+      "id": "phc_shirur_2026-09-19",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-19",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-20": {
+      "id": "phc_shirur_2026-09-20",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-20",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-21": {
+      "id": "phc_shirur_2026-09-21",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-21",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-22": {
+      "id": "phc_shirur_2026-09-22",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-22",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-23": {
+      "id": "phc_shirur_2026-09-23",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-23",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-24": {
+      "id": "phc_shirur_2026-09-24",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-24",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-25": {
+      "id": "phc_shirur_2026-09-25",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-25",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-26": {
+      "id": "phc_shirur_2026-09-26",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-26",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_shirur_2026-09-27": {
+      "id": "phc_shirur_2026-09-27",
+      "phc_id": "phc_shirur",
+      "date": "2026-09-27",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-06": {
+      "id": "phc_junnar_2026-09-06",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-06",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-07": {
+      "id": "phc_junnar_2026-09-07",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-07",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-08": {
+      "id": "phc_junnar_2026-09-08",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-08",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-09": {
+      "id": "phc_junnar_2026-09-09",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-09",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-10": {
+      "id": "phc_junnar_2026-09-10",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-10",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-11": {
+      "id": "phc_junnar_2026-09-11",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-11",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-12": {
+      "id": "phc_junnar_2026-09-12",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-12",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-13": {
+      "id": "phc_junnar_2026-09-13",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-13",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-14": {
+      "id": "phc_junnar_2026-09-14",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-14",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-15": {
+      "id": "phc_junnar_2026-09-15",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-15",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-16": {
+      "id": "phc_junnar_2026-09-16",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-16",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-17": {
+      "id": "phc_junnar_2026-09-17",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-17",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-18": {
+      "id": "phc_junnar_2026-09-18",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-18",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-19": {
+      "id": "phc_junnar_2026-09-19",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-19",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-20": {
+      "id": "phc_junnar_2026-09-20",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-20",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-21": {
+      "id": "phc_junnar_2026-09-21",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-21",
+      "present_count": 12,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-22": {
+      "id": "phc_junnar_2026-09-22",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-22",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-23": {
+      "id": "phc_junnar_2026-09-23",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-23",
+      "present_count": 9,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-24": {
+      "id": "phc_junnar_2026-09-24",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-24",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-25": {
+      "id": "phc_junnar_2026-09-25",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-25",
+      "present_count": 10,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-26": {
+      "id": "phc_junnar_2026-09-26",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-26",
+      "present_count": 11,
+      "total_staff": 12
+    },
+    "phc_junnar_2026-09-27": {
+      "id": "phc_junnar_2026-09-27",
+      "phc_id": "phc_junnar",
+      "date": "2026-09-27",
+      "present_count": 12,
+      "total_staff": 12
+    }
+  },
+  "alerts": {
+    "alert_1d4b8f66": {
+      "id": "alert_1d4b8f66",
+      "phc_id": "phc_kiwale",
+      "phc_name": "PHC Kiwale",
+      "district": "Pimpri-Chinchwad",
+      "medicine_id": "med_insulin",
+      "medicine_name": "Insulin Regular 100 IU/mL",
+      "current_qty": 8,
+      "days_left": 2.3,
+      "message": "PHC Kiwale in Pimpri-Chinchwad faces an imminent stockout of Insulin Regular 100 IU/mL with only 8 vials (~2.3 days) remaining. Immediately transfer 35 vials from PHC Talegaon, which holds a surplus of 182 vials. This cross-facility redistribution prevents patient treatment interruption while maintaining safety stock at both centres.",
+      "severity": "critical",
+      "created_at": "2026-09-27T18:30:41.319366+00:00",
+      "resolved": false,
+      "source": "Operational Fallback Rule Engine",
+      "donor_phc_id": "phc_talegaon",
+      "donor_phc_name": "PHC Talegaon",
+      "surplus_qty": 182
+    },
+    "alert_2e988e08": {
+      "id": "alert_2e988e08",
+      "phc_id": "phc_alandi",
+      "phc_name": "PHC Alandi",
+      "district": "Nation B",
+      "medicine_id": "med_ors",
+      "medicine_name": "Oral Rehydration Salts (ORS)",
+      "current_qty": 30,
+      "days_left": 2.5,
+      "message": "PHC Alandi in Nation B faces an imminent stockout of Oral Rehydration Salts (ORS) with only 30 sachets (~2.5 days) remaining. Immediately transfer 120 sachets from PHC Khed, which holds a surplus of 415 sachets. This cross-facility redistribution prevents patient treatment interruption while maintaining safety stock at both centres.",
+      "severity": "critical",
+      "created_at": "2026-09-27T18:31:00.071167+00:00",
+      "resolved": false,
+      "source": "Operational Fallback Rule Engine",
+      "donor_phc_id": "phc_khed",
+      "donor_phc_name": "PHC Khed",
+      "surplus_qty": 415
+    },
+    "alert_6e82138d": {
+      "id": "alert_6e82138d",
+      "phc_id": "phc_chikhli",
+      "phc_name": "PHC Chikhli",
+      "district": "Pimpri-Chinchwad",
+      "medicine_id": "med_paracetamol",
+      "medicine_name": "Paracetamol 500mg Tablets",
+      "current_qty": 2,
+      "days_left": 0.1,
+      "message": "PHC Chikhli in Pimpri-Chinchwad faces an imminent stockout of Paracetamol 500mg Tablets with only 2 strips (~0.1 days) remaining. Immediately transfer 223 strips from PHC Dehu Road, which holds a surplus of 473 strips. This cross-facility redistribution prevents patient treatment interruption while maintaining safety stock at both centres.",
+      "severity": "critical",
+      "created_at": "2026-09-27T18:31:37.028643+00:00",
+      "resolved": false,
+      "source": "Operational Fallback Rule Engine",
+      "donor_phc_id": "phc_dehu_road",
+      "donor_phc_name": "PHC Dehu Road",
+      "surplus_qty": 473
+    },
+    "alert_89a09e1f": {
+      "id": "alert_89a09e1f",
+      "phc_id": "phc_talegaon",
+      "phc_name": "PHC Talegaon",
+      "district": "Pimpri-Chinchwad",
+      "medicine_id": "med_paracetamol",
+      "medicine_name": "Paracetamol 500mg Tablets",
+      "current_qty": 2,
+      "days_left": 0.1,
+      "message": "PHC Talegaon in Pimpri-Chinchwad faces an imminent stockout of Paracetamol 500mg Tablets with only 2 strips (~0.1 days) remaining. Immediately transfer 228 strips from PHC Dehu Road, which holds a surplus of 473 strips. This cross-facility redistribution prevents patient treatment interruption while maintaining safety stock at both centres.",
+      "severity": "critical",
+      "created_at": "2026-09-27T18:32:47.933676+00:00",
+      "resolved": true,
+      "source": "Operational Fallback Rule Engine",
+      "donor_phc_id": "phc_dehu_road",
+      "donor_phc_name": "PHC Dehu Road",
+      "surplus_qty": 473,
+      "resolved_at": "2026-09-27T18:33:06.036176+00:00"
+    },
+    "alert_5332c1b7": {
+      "id": "alert_5332c1b7",
+      "phc_id": "phc_talegaon",
+      "phc_name": "PHC Talegaon",
+      "district": "Pimpri-Chinchwad",
+      "medicine_id": "med_paracetamol",
+      "medicine_name": "Paracetamol 500mg Tablets",
+      "current_qty": 2,
+      "days_left": 0.1,
+      "message": "PHC Talegaon in Pimpri-Chinchwad faces an imminent stockout of Paracetamol 500mg Tablets with only 2 strips (~0.1 days) remaining. Immediately transfer 228 strips from PHC Dehu Road, which holds a surplus of 473 strips. This cross-facility redistribution prevents patient treatment interruption while maintaining safety stock at both centres.",
+      "severity": "critical",
+      "created_at": "2026-09-27T18:35:08.613944+00:00",
+      "resolved": true,
+      "source": "Operational Fallback Rule Engine",
+      "donor_phc_id": "phc_dehu_road",
+      "donor_phc_name": "PHC Dehu Road",
+      "surplus_qty": 473,
+      "resolved_at": "2026-09-27T18:35:26.446378+00:00"
+    }
+  }
+}
