@@ -600,17 +600,17 @@
       "id": "phc_alandi_med_metformin",
       "phc_id": "phc_alandi",
       "medicine_id": "med_metformin",
-      "current_qty": 323,
+      "current_qty": 2,
       "avg_daily_consumption": 16.1,
-      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+      "last_updated": "2026-09-27T18:42:16.453024+00:00"
     },
     "phc_alandi_med_salbutamol": {
       "id": "phc_alandi_med_salbutamol",
       "phc_id": "phc_alandi",
       "medicine_id": "med_salbutamol",
-      "current_qty": 98,
+      "current_qty": 2,
       "avg_daily_consumption": 3.6,
-      "last_updated": "2026-09-27T18:35:17.886829+00:00"
+      "last_updated": "2026-09-27T18:42:26.752654+00:00"
     },
     "phc_alandi_med_oxytocin": {
       "id": "phc_alandi_med_oxytocin",
@@ -3266,11 +3266,12 @@
       "message": "PHC Chikhli in Pimpri-Chinchwad faces an imminent stockout of Paracetamol 500mg Tablets with only 2 strips (~0.1 days) remaining. Immediately transfer 223 strips from PHC Dehu Road, which holds a surplus of 473 strips. This cross-facility redistribution prevents patient treatment interruption while maintaining safety stock at both centres.",
       "severity": "critical",
       "created_at": "2026-09-27T18:31:37.028643+00:00",
-      "resolved": false,
+      "resolved": true,
       "source": "Operational Fallback Rule Engine",
       "donor_phc_id": "phc_dehu_road",
       "donor_phc_name": "PHC Dehu Road",
-      "surplus_qty": 473
+      "surplus_qty": 473,
+      "resolved_at": "2026-09-27T18:41:58.714935+00:00"
     },
     "alert_89a09e1f": {
       "id": "alert_89a09e1f",
@@ -3309,6 +3310,42 @@
       "donor_phc_name": "PHC Dehu Road",
       "surplus_qty": 473,
       "resolved_at": "2026-09-27T18:35:26.446378+00:00"
+    },
+    "alert_df69a09c": {
+      "id": "alert_df69a09c",
+      "phc_id": "phc_alandi",
+      "phc_name": "PHC Alandi",
+      "district": "Nation B",
+      "medicine_id": "med_metformin",
+      "medicine_name": "Metformin 500mg Tablets",
+      "current_qty": 2,
+      "days_left": 0.1,
+      "message": "PHC Alandi in Nation B faces an imminent stockout of Metformin 500mg Tablets with only 2 strips (~0.1 days) remaining. Immediately transfer 161 strips from PHC Khed, which holds a surplus of 240 strips. This cross-facility redistribution prevents patient treatment interruption while maintaining safety stock at both centres.",
+      "severity": "critical",
+      "created_at": "2026-09-27T18:42:17.039900+00:00",
+      "resolved": false,
+      "source": "Operational Fallback Rule Engine",
+      "donor_phc_id": "phc_khed",
+      "donor_phc_name": "PHC Khed",
+      "surplus_qty": 240
+    },
+    "alert_79d18e15": {
+      "id": "alert_79d18e15",
+      "phc_id": "phc_alandi",
+      "phc_name": "PHC Alandi",
+      "district": "Nation B",
+      "medicine_id": "med_salbutamol",
+      "medicine_name": "Salbutamol Inhaler 100mcg",
+      "current_qty": 2,
+      "days_left": 0.6,
+      "message": "PHC Alandi in Nation B faces an imminent stockout of Salbutamol Inhaler 100mcg with only 2 inhalers (~0.6 days) remaining. Immediately transfer 36 inhalers from PHC Khed, which holds a surplus of 60 inhalers. This cross-facility redistribution prevents patient treatment interruption while maintaining safety stock at both centres.",
+      "severity": "critical",
+      "created_at": "2026-09-27T18:42:27.169587+00:00",
+      "resolved": false,
+      "source": "Operational Fallback Rule Engine",
+      "donor_phc_id": "phc_khed",
+      "donor_phc_name": "PHC Khed",
+      "surplus_qty": 60
     }
   }
 }
