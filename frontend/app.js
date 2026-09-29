@@ -1,10 +1,10 @@
 /**
- * Smart Health & Supply Chain Resilience — Frontend Controller
+ * SmartHealth Resilience — Public Health Operations Bulletin Controller
  * Track 3: Resilience (Build with AI: Code for Communities)
  * Vanilla JS, no build step, no npm bundling.
  */
 
-// State container
+// Application state container
 const state = {
   phcs: [],
   alerts: [],
@@ -15,21 +15,82 @@ const state = {
   isSimulating: false
 };
 
-// Base API URL: uses relative origin (works on both localhost and deployed Cloud Run/Firebase)
 const API_BASE = "";
 
+// Schematic SVG coordinates for the 8 primary health centres
+const MAP_COORDS = {
+  "phc_talegaon": { x: 120, y: 130 },
+  "phc_dehu_road": { x: 190, y: 220 },
+  "phc_kiwale":    { x: 230, y: 320 },
+  "phc_chikhli":   { x: 340, y: 210 },
+  "phc_junnar":    { x: 570, y: 110 },
+  "phc_khed":      { x: 620, y: 210 },
+  "phc_alandi":    { x: 550, y: 320 },
+  "phc_shirur":    { x: 790, y: 240 }
+};
+
 // -----------------------------------------------------------------------------
-// Initialization
+// Pure Status Derivation Functions (Requirement A2 & A3)
+// -----------------------------------------------------------------------------
+
+/**
+ * Pure function of live telemetry: computes status directly on every render.
+ * Red / Critical = runway < 5 days or at_risk_count > 0
+ * Amber / Low stock = runway < 10 days
+ * Green / Optimal = runway >= 10 days
+ */
+function computePhcStatus(phc) {
+  const worstDays = typeof phc.worst_days_left === "number" ? phc.worst_days_left : 30.0;
+  if (worstDays < 5.0 || (phc.at_risk_medicines_count && phc.at_risk_medicines_count > 0)) {
+    return "critical";
+  }
+  if (worstDays < 10.0) {
+    return "warning";
+  }
+  return "optimal";
+}
+
+function getStatusBadgeHtml(status) {
+  if (status === "critical") {
+    return `
+      <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-[#F8EFEF] text-[#A6362A] border border-[#E0BCB7]">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#A6362A] mr-1.5 shrink-0"></span>
+        Critical stockout
+      </span>
+    `;
+  }
+  if (status === "warning") {
+    return `
+      <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-[#FAF4E6] text-[#8A6508] border border-[#E6D4AA]">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#B8860B] mr-1.5 shrink-0"></span>
+        Low stock
+      </span>
+    `;
+  }
+  return `
+    <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-[#EDF5F3] text-[#0F6E63] border border-[#BAD5D0]">
+      <span class="w-1.5 h-1.5 rounded-full bg-[#0F6E63] mr-1.5 shrink-0"></span>
+      Optimal stock
+    </span>
+  `;
+}
+
+// -----------------------------------------------------------------------------
+// Initialization & Event Binding
 // -----------------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", async () => {
   setupEventListeners();
+  updateLiveClock();
+  setInterval(updateLiveClock, 1000);
+  
   await refreshAllData();
-  // Auto-refresh alerts and statuses every 30 seconds
+  
+  // Periodic background telemetry synchronization (every 25 seconds)
   setInterval(async () => {
     if (!state.isSimulating) {
       await refreshAllData(false);
     }
-  }, 30000);
+  }, 25000);
 });
 
 function setupEventListeners() {
@@ -38,23 +99,23 @@ function setupEventListeners() {
   document.getElementById("tabDistrictPimpri")?.addEventListener("click", () => setDistrictFilter("Pimpri-Chinchwad"));
   document.getElementById("tabDistrictNationB")?.addEventListener("click", () => setDistrictFilter("Nation B"));
 
-  // Alerts filter buttons
+  // Alerts wire filter
   document.getElementById("btnFilterAlertsActive")?.addEventListener("click", () => setAlertsFilter("active"));
   document.getElementById("btnFilterAlertsAll")?.addEventListener("click", () => setAlertsFilter("all"));
 
-  // Header quick action buttons
+  // Header quick actions
   document.getElementById("btnRefresh")?.addEventListener("click", () => {
-    showToast("Refreshing live network forecast...", "info");
+    showToast("Synchronizing health network telemetry...", "info");
     refreshAllData(true);
   });
 
   document.getElementById("btnResetDemo")?.addEventListener("click", async () => {
-    if (confirm("Reset network data back to initial baseline demo state?")) {
+    if (confirm("Reset network telemetry to baseline state? This clears all simulated crisis alerts and restores standard stock.")) {
       await resetDemoState();
     }
   });
 
-  // Modal close buttons
+  // Modal close handlers
   document.getElementById("btnModalClose")?.addEventListener("click", closeModal);
   document.getElementById("btnModalCloseBottom")?.addEventListener("click", closeModal);
   window.addEventListener("keydown", (e) => {
@@ -62,27 +123,36 @@ function setupEventListeners() {
   });
 }
 
+function updateLiveClock() {
+  const clock = document.getElementById("mastheadClock");
+  if (clock) {
+    const now = new Date();
+    clock.textContent = `${now.toISOString().substring(11, 19)} UTC | Live network active`;
+  }
+}
+
 // -----------------------------------------------------------------------------
-// Data Fetching
+// Data Fetching & Sync
 // -----------------------------------------------------------------------------
 async function refreshAllData(showSuccessToast = false) {
   try {
     await Promise.all([fetchPHCs(), fetchAlerts()]);
-    renderKPIs();
-    renderPHCGrid();
-    renderAlertsFeed();
+    renderAggregateKPIs();
+    renderNetworkMap();
+    renderPHCLedger();
+    renderWireFeed();
     if (showSuccessToast) {
-      showToast("Healthcare network status synchronized.", "success");
+      showToast("Health network state synchronized.", "info");
     }
   } catch (error) {
-    console.error("Failed to refresh data:", error);
-    showToast("Error updating telemetry: " + error.message, "error");
+    console.error("Telemetry refresh failed:", error);
+    showToast("Could not synchronize telemetry: " + error.message, "error");
   }
 }
 
 async function fetchPHCs() {
   const res = await fetch(`${API_BASE}/phcs`);
-  if (!res.ok) throw new Error(`HTTP ${res.status} fetching PHCs`);
+  if (!res.ok) throw new Error(`HTTP ${res.status} fetching health centres`);
   state.phcs = await res.json();
 }
 
@@ -95,26 +165,25 @@ async function fetchAlerts() {
 
 async function resetDemoState() {
   try {
-    showToast("Resetting database to initial baseline...", "info");
+    showToast("Restoring baseline inventory and clearing crisis alerts...", "info");
     const res = await fetch(`${API_BASE}/seed`, { method: "POST" });
     if (!res.ok) throw new Error("Failed to reset database");
     await refreshAllData();
-    showToast("Demo baseline restored successfully!", "success");
+    showToast("Baseline state restored successfully.", "info");
   } catch (err) {
     showToast("Reset failed: " + err.message, "error");
   }
 }
 
 // -----------------------------------------------------------------------------
-// Filters & State Setters
+// Filters & State Updaters
 // -----------------------------------------------------------------------------
 function setDistrictFilter(district) {
   state.activeDistrictFilter = district;
-  
-  // Update tab visual styling
+
   document.querySelectorAll(".district-tab").forEach(tab => {
-    tab.classList.remove("active", "bg-white", "text-slate-900", "font-semibold", "shadow-xs");
-    tab.classList.add("text-slate-600");
+    tab.classList.remove("active", "bg-white", "text-[#1C2B29]", "font-semibold");
+    tab.classList.add("text-[#526360]");
   });
 
   let activeTabId = "tabDistrictAll";
@@ -123,11 +192,12 @@ function setDistrictFilter(district) {
 
   const el = document.getElementById(activeTabId);
   if (el) {
-    el.classList.add("active", "bg-white", "text-slate-900", "font-semibold", "shadow-xs");
-    el.classList.remove("text-slate-600");
+    el.classList.add("active", "bg-white", "text-[#1C2B29]", "font-semibold");
+    el.classList.remove("text-[#526360]");
   }
 
-  renderPHCGrid();
+  renderNetworkMap();
+  renderPHCLedger();
 }
 
 function setAlertsFilter(filter) {
@@ -136,48 +206,215 @@ function setAlertsFilter(filter) {
   const btnAll = document.getElementById("btnFilterAlertsAll");
 
   if (filter === "active") {
-    btnActive.className = "px-2.5 py-1 rounded-md bg-rose-600 text-white font-medium shadow-xs";
-    btnAll.className = "px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium";
+    btnActive.className = "px-2.5 py-1 rounded bg-[#1C2B29] text-white font-medium text-xs";
+    btnAll.className = "px-2.5 py-1 rounded bg-[#EAEFE6] hover:bg-[#DEE5D9] text-[#1C2B29] font-medium text-xs";
   } else {
-    btnActive.className = "px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium";
-    btnAll.className = "px-2.5 py-1 rounded-md bg-rose-600 text-white font-medium shadow-xs";
+    btnActive.className = "px-2.5 py-1 rounded bg-[#EAEFE6] hover:bg-[#DEE5D9] text-[#1C2B29] font-medium text-xs";
+    btnAll.className = "px-2.5 py-1 rounded bg-[#1C2B29] text-white font-medium text-xs";
   }
 
-  fetchAlerts().then(() => renderAlertsFeed());
+  fetchAlerts().then(() => {
+    renderWireFeed();
+    renderNetworkMap();
+  });
 }
 
 // -----------------------------------------------------------------------------
-// Top KPIs Bar Rendering
+// Aggregate Stats (Requirement A3: Pure derivation, no counters)
 // -----------------------------------------------------------------------------
-function renderKPIs() {
+function renderAggregateKPIs() {
   const total = state.phcs.length;
-  const critical = state.phcs.filter(p => p.status === "red").length;
-  const amber = state.phcs.filter(p => p.status === "amber").length;
-  const green = state.phcs.filter(p => p.status === "green").length;
+  let criticalCount = 0;
+  let warningCount = 0;
+  let optimalCount = 0;
+
+  for (const phc of state.phcs) {
+    const s = computePhcStatus(phc);
+    if (s === "critical") criticalCount++;
+    else if (s === "warning") warningCount++;
+    else optimalCount++;
+  }
 
   document.getElementById("kpiTotalPhcs").textContent = total;
-  document.getElementById("kpiCriticalPhcs").textContent = critical;
-  document.getElementById("kpiAmberPhcs").textContent = amber;
-  document.getElementById("kpiGreenPhcs").textContent = green;
-
-  const activeAlertsCount = state.alerts.filter(a => !a.resolved).length;
-  const badge = document.getElementById("activeAlertsBadge");
-  if (badge) {
-    badge.textContent = `${activeAlertsCount} Active`;
-    if (activeAlertsCount > 0) {
-      badge.className = "bg-rose-600 text-white text-[11px] px-2 py-0.5 rounded-full font-semibold animate-pulse";
-    } else {
-      badge.className = "bg-emerald-600 text-white text-[11px] px-2 py-0.5 rounded-full font-semibold";
-    }
-  }
+  document.getElementById("kpiCriticalPhcs").textContent = criticalCount;
+  document.getElementById("kpiAmberPhcs").textContent = warningCount;
+  document.getElementById("kpiGreenPhcs").textContent = optimalCount;
 }
 
 // -----------------------------------------------------------------------------
-// PHC Grid & Status Cards Rendering
+// Hero Section: Network Resilience Map Schematic (Part B)
 // -----------------------------------------------------------------------------
-function renderPHCGrid() {
-  const container = document.getElementById("phcGridContainer");
-  if (!container) return;
+function renderNetworkMap() {
+  const nodesLayer = document.getElementById("mapNodesLayer");
+  const transferLayer = document.getElementById("mapTransferLinesLayer");
+  if (!nodesLayer || !transferLayer) return;
+
+  // Clear previous SVG content
+  nodesLayer.innerHTML = "";
+  transferLayer.innerHTML = "";
+
+  // 1. Render Active Redistribution Arcs (The One Animated Moment)
+  const activeAlerts = state.alerts.filter(a => !a.resolved && a.donor_phc_id && a.phc_id);
+  const drawnPairs = new Set();
+
+  activeAlerts.forEach(alert => {
+    const pairKey = `${alert.donor_phc_id}->${alert.phc_id}`;
+    if (drawnPairs.has(pairKey)) return;
+    drawnPairs.add(pairKey);
+
+    const fromCoord = MAP_COORDS[alert.donor_phc_id];
+    const toCoord = MAP_COORDS[alert.phc_id];
+
+    if (fromCoord && toCoord) {
+      // Calculate smooth quadratic bezier control point
+      const midX = (fromCoord.x + toCoord.x) / 2;
+      const midY = (fromCoord.y + toCoord.y) / 2 - 35;
+
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", `M ${fromCoord.x} ${fromCoord.y} Q ${midX} ${midY} ${toCoord.x} ${toCoord.y}`);
+      path.setAttribute("fill", "none");
+      path.setAttribute("class", "active-transfer-arc");
+      path.setAttribute("marker-end", "url(#arrowTeal)");
+      transferLayer.appendChild(path);
+
+      // Label at midpoint
+      const labelGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      const labelBg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      labelBg.setAttribute("x", midX - 52);
+      labelBg.setAttribute("y", midY - 11);
+      labelBg.setAttribute("width", "104");
+      labelBg.setAttribute("height", "16");
+      labelBg.setAttribute("rx", "3");
+      labelBg.setAttribute("fill", "#FFFFFF");
+      labelBg.setAttribute("stroke", "#0F6E63");
+      labelBg.setAttribute("stroke-width", "1");
+
+      const labelText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      labelText.setAttribute("x", midX);
+      labelText.setAttribute("y", midY + 1);
+      labelText.setAttribute("font-family", "'Public Sans', sans-serif");
+      labelText.setAttribute("font-size", "9");
+      labelText.setAttribute("font-weight", "600");
+      labelText.setAttribute("fill", "#0F6E63");
+      labelText.setAttribute("text-anchor", "middle");
+      labelText.textContent = `Lateral transfer`;
+
+      labelGroup.appendChild(labelBg);
+      labelGroup.appendChild(labelText);
+      transferLayer.appendChild(labelGroup);
+    }
+  });
+
+  // 2. Render PHC Facility Nodes
+  state.phcs.forEach(phc => {
+    const coords = MAP_COORDS[phc.id];
+    if (!coords) return;
+
+    // Filter check: dim nodes not in selected district
+    const isFilteredOut = state.activeDistrictFilter !== "all" && phc.district !== state.activeDistrictFilter;
+    const opacity = isFilteredOut ? "0.3" : "1.0";
+
+    const status = computePhcStatus(phc);
+    let radius = 13;
+    let fill = "#0F6E63"; // Teal (optimal)
+    let stroke = "#094740";
+    let pulseClass = "";
+    let statusText = `${phc.worst_days_left}d`;
+
+    if (status === "critical") {
+      radius = 18;
+      fill = "#A6362A"; // Vermillion (critical)
+      stroke = "#74221A";
+      pulseClass = "critical-pulse-node";
+      statusText = `Critical (${phc.worst_days_left}d)`;
+    } else if (status === "warning") {
+      radius = 15;
+      fill = "#B8860B"; // Turmeric (low stock)
+      stroke = "#8A6508";
+      statusText = `Low (${phc.worst_days_left}d)`;
+    }
+
+    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    g.setAttribute("class", `phc-map-node cursor-pointer ${pulseClass}`);
+    g.setAttribute("style", `opacity: ${opacity}; transition: opacity 0.2s;`);
+    g.setAttribute("role", "button");
+    g.setAttribute("tabindex", "0");
+    g.setAttribute("aria-label", `${phc.name}, ${status} status, shortest runway ${phc.worst_days_left} days`);
+
+    // Outer glow for critical
+    if (status === "critical") {
+      const halo = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      halo.setAttribute("cx", coords.x);
+      halo.setAttribute("cy", coords.y);
+      halo.setAttribute("r", radius + 6);
+      halo.setAttribute("fill", "rgba(166, 54, 42, 0.18)");
+      halo.setAttribute("stroke", "#A6362A");
+      halo.setAttribute("stroke-width", "1");
+      halo.setAttribute("stroke-dasharray", "2 2");
+      g.appendChild(halo);
+    }
+
+    // Main Circle
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", coords.x);
+    circle.setAttribute("cy", coords.y);
+    circle.setAttribute("r", radius);
+    circle.setAttribute("fill", fill);
+    circle.setAttribute("stroke", stroke);
+    circle.setAttribute("stroke-width", "2");
+    g.appendChild(circle);
+
+    // Inner icon / pulse ring
+    const innerDot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    innerDot.setAttribute("cx", coords.x);
+    innerDot.setAttribute("cy", coords.y);
+    innerDot.setAttribute("r", 3.5);
+    innerDot.setAttribute("fill", "#FFFFFF");
+    g.appendChild(innerDot);
+
+    // Facility Label Text (Sentence Case)
+    const textName = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    textName.setAttribute("x", coords.x);
+    textName.setAttribute("y", coords.y + radius + 14);
+    textName.setAttribute("font-family", "'Public Sans', sans-serif");
+    textName.setAttribute("font-size", "11");
+    textName.setAttribute("font-weight", "600");
+    textName.setAttribute("fill", "#1C2B29");
+    textName.setAttribute("text-anchor", "middle");
+    textName.textContent = phc.name;
+    g.appendChild(textName);
+
+    // Runway Label (Tabular lining numerals)
+    const textStatus = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    textStatus.setAttribute("x", coords.x);
+    textStatus.setAttribute("y", coords.y + radius + 26);
+    textStatus.setAttribute("font-family", "'Public Sans', sans-serif");
+    textStatus.setAttribute("font-size", "10");
+    textStatus.setAttribute("font-weight", "500");
+    textStatus.setAttribute("fill", status === "critical" ? "#A6362A" : status === "warning" ? "#8A6508" : "#0F6E63");
+    textStatus.setAttribute("text-anchor", "middle");
+    textStatus.textContent = statusText;
+    g.appendChild(textStatus);
+
+    // Click & Keyboard interactions
+    g.addEventListener("click", () => openPhcModal(phc.id));
+    g.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openPhcModal(phc.id);
+      }
+    });
+
+    nodesLayer.appendChild(g);
+  });
+}
+
+// -----------------------------------------------------------------------------
+// Health Centre Ledger / Manifest (Dense Scannable List)
+// -----------------------------------------------------------------------------
+function renderPHCLedger() {
+  const tbody = document.getElementById("phcLedgerBody");
+  if (!tbody) return;
 
   let filtered = state.phcs;
   if (state.activeDistrictFilter !== "all") {
@@ -185,113 +422,79 @@ function renderPHCGrid() {
   }
 
   if (filtered.length === 0) {
-    container.innerHTML = `
-      <div class="col-span-full py-12 text-center text-slate-400">
-        No PHCs found matching selected filter.
-      </div>
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="7" class="py-8 text-center text-[#697B78] text-xs">
+          No health centres match the selected jurisdiction filter.
+        </td>
+      </tr>
     `;
     return;
   }
 
-  container.innerHTML = filtered.map(phc => {
-    const isRed = phc.status === "red";
-    const isAmber = phc.status === "amber";
-
-    let borderClass = "border-emerald-200 hover:border-emerald-300";
-    let bgGlow = "bg-white";
-    let statusBadge = `
-      <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5"></span> Optimal Stock
-      </span>
-    `;
-
-    if (isRed) {
-      borderClass = "border-rose-400 shadow-md ring-1 ring-rose-400/40 crisis-card-pulse";
-      bgGlow = "bg-gradient-to-b from-rose-50/60 to-white";
-      statusBadge = `
-        <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold bg-rose-100 text-rose-800 border border-rose-300 animate-pulse">
-          <span class="w-1.5 h-1.5 rounded-full bg-rose-600 mr-1.5"></span> Critical Risk (<5d)
-        </span>
-      `;
-    } else if (isAmber) {
-      borderClass = "border-amber-300 shadow-xs";
-      bgGlow = "bg-gradient-to-b from-amber-50/40 to-white";
-      statusBadge = `
-        <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300">
-          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5"></span> Low Stock (<10d)
-        </span>
-      `;
-    }
-
-    const runwayColor = isRed ? "text-rose-600" : isAmber ? "text-amber-600" : "text-emerald-700";
+  tbody.innerHTML = filtered.map(phc => {
+    const status = computePhcStatus(phc);
+    const statusBadge = getStatusBadgeHtml(status);
+    const runwayColor = status === "critical" ? "text-[#A6362A] font-bold" : status === "warning" ? "text-[#8A6508] font-semibold" : "text-[#0F6E63]";
 
     return `
-      <div class="rounded-2xl border ${borderClass} ${bgGlow} transition-all duration-200 flex flex-col justify-between overflow-hidden group">
-        <!-- Card Header -->
-        <div class="p-4 sm:p-5 pb-3">
-          <div class="flex items-start justify-between gap-2 mb-2">
-            <div>
-              <h3 class="font-bold text-slate-900 group-hover:text-emerald-700 transition-colors cursor-pointer" onclick="openPhcModal('${phc.id}')">
-                ${phc.name}
-              </h3>
-              <div class="flex items-center space-x-1.5 text-xs text-slate-500 mt-0.5">
-                <i data-lucide="map-pin" class="w-3 h-3 text-slate-400"></i>
-                <span>${phc.district}</span>
-              </div>
-            </div>
-            <div>${statusBadge}</div>
+      <tr class="hover:bg-[#F6F8F4] transition-colors">
+        <!-- Facility name & jurisdiction -->
+        <td class="py-3 px-4">
+          <div class="font-semibold text-[#1C2B29] cursor-pointer hover:text-[#0F6E63]" onclick="openPhcModal('${phc.id}')">
+            ${phc.name}
           </div>
-
-          <!-- Runway Metric Card -->
-          <div class="mt-3 p-3 rounded-xl bg-slate-50/80 border border-slate-200/80 flex items-center justify-between">
-            <div>
-              <span class="text-[11px] font-medium text-slate-500">Worst Medicine Runway</span>
-              <div class="text-xl font-extrabold ${runwayColor} tracking-tight">
-                ${phc.worst_days_left} <span class="text-xs font-semibold text-slate-400">days</span>
-              </div>
-            </div>
-            <div class="text-right text-[11px] text-slate-500">
-              <div>Medicines: <strong class="text-slate-800">${phc.total_medicines_count}</strong></div>
-              <div>At Risk: <strong class="${phc.at_risk_medicines_count > 0 ? 'text-rose-600 font-bold' : 'text-slate-700'}">${phc.at_risk_medicines_count}</strong></div>
-            </div>
+          <div class="text-[11px] text-[#697B78]">
+            ${phc.district}
           </div>
+        </td>
 
-          <!-- Operational Indicators -->
-          <div class="mt-3 grid grid-cols-2 gap-2 text-xs text-slate-600 pt-1">
-            <div class="flex items-center space-x-1.5">
-              <i data-lucide="users" class="w-3.5 h-3.5 text-slate-400"></i>
-              <span>Footfall: <strong class="text-slate-800">${phc.today_patient_footfall}</strong></span>
-            </div>
-            <div class="flex items-center space-x-1.5">
-              <i data-lucide="user-check" class="w-3.5 h-3.5 text-slate-400"></i>
-              <span>Staff: <strong class="text-slate-800">${phc.today_staff_present}/${phc.today_total_staff}</strong></span>
-            </div>
+        <!-- District column -->
+        <td class="py-3 px-3 text-[#526360]">
+          ${phc.district === "Pimpri-Chinchwad" ? "Municipal district" : "Partner node"}
+        </td>
+
+        <!-- Live status -->
+        <td class="py-3 px-3 text-center">
+          ${statusBadge}
+        </td>
+
+        <!-- Runway figure (tabular numerals) -->
+        <td class="py-3 px-3 text-right tabular-nums">
+          <span class="${runwayColor} text-sm">${phc.worst_days_left}</span>
+          <span class="text-[#697B78] text-[11px]"> days</span>
+        </td>
+
+        <!-- Patient count -->
+        <td class="py-3 px-3 text-right tabular-nums text-[#3D504D]">
+          ${phc.today_patient_footfall}
+        </td>
+
+        <!-- Staff present -->
+        <td class="py-3 px-3 text-right tabular-nums text-[#3D504D]">
+          ${phc.today_staff_present} / ${phc.today_total_staff}
+        </td>
+
+        <!-- Actions -->
+        <td class="py-3 px-4 text-center">
+          <div class="inline-flex items-center space-x-2">
+            <button 
+              onclick="openPhcModal('${phc.id}')"
+              class="px-2.5 py-1 rounded bg-white hover:bg-[#EEF1EC] text-[#1C2B29] border border-token text-xs font-medium transition-colors"
+            >
+              Inspect
+            </button>
+            <button 
+              id="btnCrisis-${phc.id}"
+              onclick="triggerSimulateCrisis('${phc.id}', '${phc.healthiest_medicine_id}')"
+              title="Simulate sudden stockout crisis for live demonstration"
+              class="px-2.5 py-1 rounded bg-[#F8EFEF] hover:bg-[#F2E4E4] text-[#A6362A] border border-[#D9B2AC] text-xs font-semibold transition-colors"
+            >
+              Simulate crisis
+            </button>
           </div>
-        </div>
-
-        <!-- Card Action Footer -->
-        <div class="p-4 pt-2 bg-slate-50/60 border-t border-slate-100 flex items-center gap-2">
-          <!-- View Details Button -->
-          <button 
-            onclick="openPhcModal('${phc.id}')"
-            class="flex-1 py-2 px-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold transition-colors flex items-center justify-center space-x-1"
-          >
-            <i data-lucide="eye" class="w-3.5 h-3.5 text-slate-500"></i>
-            <span>Inspect</span>
-          </button>
-
-          <!-- Simulate Crisis Button (Live Demo Centerpiece) -->
-          <button 
-            id="btnCrisis-${phc.id}"
-            onclick="triggerSimulateCrisis('${phc.id}', '${phc.healthiest_medicine_id}')"
-            title="Simulate sudden stockout crisis for live demonstration"
-            class="flex-1 py-2 px-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-700 hover:from-rose-700 hover:to-red-800 text-white text-xs font-bold shadow-xs hover:shadow transition-all flex items-center justify-center space-x-1 active:scale-95"
-          >
-            <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-300"></i>
-            <span>Simulate Crisis</span>
-          </button>
-        </div>
-      </div>
+        </td>
+      </tr>
     `;
   }).join("");
 
@@ -299,21 +502,18 @@ function renderPHCGrid() {
 }
 
 // -----------------------------------------------------------------------------
-// Alerts Feed Rendering
+// Operations Dispatch Wire Feed (Alerts)
 // -----------------------------------------------------------------------------
-function renderAlertsFeed() {
+function renderWireFeed() {
   const container = document.getElementById("alertsContainer");
   if (!container) return;
 
   if (state.alerts.length === 0) {
     container.innerHTML = `
-      <div class="py-6 text-center text-slate-500 text-xs flex flex-col items-center justify-center space-y-1">
-        <i data-lucide="check-circle" class="w-6 h-6 text-emerald-500 mb-1"></i>
-        <span class="font-medium text-slate-700">No active stockout alerts in the network.</span>
-        <span class="text-slate-400">All PHCs currently have &ge; 5 days of essential medicine supply.</span>
+      <div class="py-6 text-center text-[#596B68] text-xs">
+        Wire clear: No active stockout alerts across monitored health centres.
       </div>
     `;
-    lucide.createIcons();
     return;
   }
 
@@ -323,57 +523,46 @@ function renderAlertsFeed() {
     const isResolved = alert.resolved;
 
     return `
-      <div class="py-3.5 flex flex-col sm:flex-row sm:items-start justify-between gap-3 text-xs ${isResolved ? 'opacity-60 bg-slate-50/50 p-2 rounded-lg' : ''}">
-        <!-- Alert Info -->
-        <div class="space-y-1.5 flex-1">
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${isCritical ? 'bg-rose-100 text-rose-800 border border-rose-200' : 'bg-amber-100 text-amber-800 border border-amber-200'}">
-              ${isCritical ? '🔴 CRITICAL STOCKOUT' : '🟡 SUPPLY WARNING'}
+      <div class="py-3 text-xs space-y-1.5 ${isResolved ? 'opacity-50' : ''}">
+        <!-- Wire Header -->
+        <div class="flex flex-wrap items-center justify-between gap-1 text-[11px]">
+          <div class="flex items-center space-x-2">
+            <span class="font-bold ${isCritical ? 'text-[#A6362A]' : 'text-[#8A6508]'}">
+              ${isCritical ? 'CRITICAL DISPATCH' : 'ADVISORY DISPATCH'}
             </span>
-            <span class="font-bold text-slate-900">${alert.phc_name}</span>
-            <span class="text-slate-400">•</span>
-            <span class="text-slate-500 font-medium">${alert.district}</span>
-            <span class="text-slate-400">•</span>
-            <span class="text-slate-700 font-semibold">${alert.medicine_name}</span>
-            <span class="text-slate-400">•</span>
-            <span class="text-[10px] text-slate-400 font-mono">${dateFormatted}</span>
-            ${isResolved ? '<span class="bg-emerald-100 text-emerald-800 text-[10px] px-1.5 py-0.5 rounded font-bold">RESOLVED</span>' : ''}
+            <span class="text-[#697B78] tabular-nums">${dateFormatted} UTC</span>
+            <span>/</span>
+            <span class="font-semibold text-[#1C2B29]">${alert.phc_name}</span>
+            <span class="text-[#697B78]">(${alert.district})</span>
+            <span>/</span>
+            <span class="text-[#3D504D] font-medium">${alert.medicine_name}</span>
+            ${isResolved ? '<span class="px-1.5 py-0.2 rounded bg-[#EDF5F3] text-[#0F6E63] font-bold text-[10px]">RESOLVED</span>' : ''}
           </div>
 
-          <!-- Alert Message (Gemini Generated) -->
-          <p class="text-slate-800 leading-relaxed font-normal bg-slate-50 p-2.5 rounded-lg border border-slate-200/80">
-            ${alert.message}
-          </p>
-
-          <!-- Redistribution Donor Info -->
-          ${alert.donor_phc_name ? `
-            <div class="flex items-center space-x-2 text-[11px] text-emerald-800 font-medium pt-0.5">
-              <i data-lucide="arrow-right-left" class="w-3.5 h-3.5 text-emerald-600"></i>
-              <span>Surplus Source: <strong>${alert.donor_phc_name}</strong> (available surplus: <strong>${alert.surplus_qty}</strong> units)</span>
-            </div>
-          ` : `
-            <div class="flex items-center space-x-2 text-[11px] text-amber-800 font-medium pt-0.5">
-              <i data-lucide="truck" class="w-3.5 h-3.5 text-amber-600"></i>
-              <span>Action: Emergency district warehouse procurement dispatch</span>
-            </div>
-          `}
+          <div class="flex items-center space-x-2">
+            <span class="text-[10px] text-[#697B78]">${alert.source || 'gemini-flash-latest'}</span>
+            ${!isResolved ? `
+              <button 
+                onclick="triggerResolveAlert('${alert.id}')"
+                class="px-2 py-0.5 rounded bg-white hover:bg-[#EEF1EC] text-[#1C2B29] border border-token text-[11px] font-medium transition-colors"
+              >
+                Acknowledge & resolve
+              </button>
+            ` : ''}
+          </div>
         </div>
 
-        <!-- Action Buttons -->
-        <div class="flex sm:flex-col items-center sm:items-end gap-1.5 shrink-0">
-          <span class="text-[10px] font-mono text-slate-400 flex items-center space-x-1">
-            <i data-lucide="sparkles" class="w-3 h-3 text-indigo-500"></i>
-            <span>${alert.source || 'gemini-flash-latest'}</span>
-          </span>
-          ${!isResolved ? `
-            <button 
-              onclick="triggerResolveAlert('${alert.id}')"
-              class="px-2.5 py-1 rounded bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-700 text-[11px] font-medium transition-colors border border-slate-200 hover:border-emerald-600"
-            >
-              Resolve Alert
-            </button>
-          ` : ''}
-        </div>
+        <!-- Wire Message Body (Plain sentence case, complete sentences) -->
+        <p class="text-[#243533] leading-relaxed bg-[#F6F8F4] p-2.5 rounded border border-token">
+          ${alert.message}
+        </p>
+
+        <!-- Surplus details line if transfer recommended -->
+        ${alert.donor_phc_name ? `
+          <div class="text-[11px] text-[#0F6E63] font-medium">
+            Transfer corridor: ${alert.donor_phc_name} holds ${alert.surplus_qty} units available surplus in ${alert.district}.
+          </div>
+        ` : ''}
       </div>
     `;
   }).join("");
@@ -382,22 +571,25 @@ function renderAlertsFeed() {
 }
 
 // -----------------------------------------------------------------------------
-// Interactive Crisis Simulation (Centerpiece for Demo)
+// Interactive Crisis Simulation (Requirement A1: Display names only)
 // -----------------------------------------------------------------------------
 async function triggerSimulateCrisis(phcId, medicineId) {
   if (state.isSimulating) return;
   state.isSimulating = true;
 
+  // Requirement A1: Look up display name, NEVER leak internal id
+  const targetPhc = state.phcs.find(p => p.id === phcId);
+  const phcDisplayName = targetPhc ? targetPhc.name : "Health centre";
+
   const btn = document.getElementById(`btnCrisis-${phcId}`);
   let originalHtml = "";
   if (btn) {
     originalHtml = btn.innerHTML;
-    btn.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i><span>Dropping Stock...</span>`;
+    btn.innerHTML = `Simulating...`;
     btn.disabled = true;
-    lucide.createIcons();
   }
 
-  showToast(`Simulating sudden stockout crisis at ${phcId}...`, "warning");
+  showToast(`Simulating sudden stockout crisis at ${phcDisplayName}...`, "warning");
 
   try {
     const res = await fetch(`${API_BASE}/simulate-crisis/${phcId}/${medicineId}`, {
@@ -407,12 +599,12 @@ async function triggerSimulateCrisis(phcId, medicineId) {
     if (!res.ok) throw new Error(`HTTP ${res.status} executing crisis`);
     const data = await res.json();
 
-    showToast(`🚨 Crisis triggered! Stock dropped to 2 units. Gemini redistribution alert generated!`, "crisis");
+    showToast(`Emergency alert created for ${phcDisplayName}. Gemini redistribution directive generated.`, "crisis");
 
-    // Refresh state to update cards to red and show new alert
+    // Refresh state to update network map, ledger, and wire feed
     await refreshAllData();
 
-    // Smooth scroll to alerts panel so the user sees the newly generated alert immediately
+    // Scroll to operations wire feed
     document.getElementById("alertsContainer")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
 
   } catch (err) {
@@ -423,7 +615,6 @@ async function triggerSimulateCrisis(phcId, medicineId) {
     if (btn) {
       btn.innerHTML = originalHtml;
       btn.disabled = false;
-      lucide.createIcons();
     }
   }
 }
@@ -432,7 +623,7 @@ async function triggerResolveAlert(alertId) {
   try {
     const res = await fetch(`${API_BASE}/alerts/${alertId}/resolve`, { method: "POST" });
     if (!res.ok) throw new Error("Failed to resolve alert");
-    showToast("Alert marked as resolved.", "success");
+    showToast("Alert resolved and stock rebalanced successfully.", "info");
     await refreshAllData();
   } catch (err) {
     showToast("Could not resolve alert: " + err.message, "error");
@@ -440,18 +631,16 @@ async function triggerResolveAlert(alertId) {
 }
 
 // -----------------------------------------------------------------------------
-// PHC Detail Modal & Chart.js Visualization
+// PHC Detail Modal & Chart.js Visualization (Reskinned)
 // -----------------------------------------------------------------------------
 async function openPhcModal(phcId) {
   state.selectedPhcId = phcId;
   const modal = document.getElementById("phcModal");
   if (!modal) return;
 
-  // Open modal container
   modal.classList.remove("hidden");
   document.body.classList.add("overflow-hidden");
 
-  // Fetch full stock & historical footfall in parallel
   try {
     const [stockRes, historyRes] = await Promise.all([
       fetch(`${API_BASE}/stock/${phcId}`),
@@ -462,36 +651,43 @@ async function openPhcModal(phcId) {
     const historyData = await historyRes.json();
     const phc = stockData.phc;
 
-    // Header updates
+    // Header updates: Clean stacked layout without middot
     document.getElementById("modalPhcName").textContent = phc.name;
-    document.getElementById("modalPhcDistrict").textContent = `${phc.district} • Lat: ${phc.lat}, Lng: ${phc.lng} • Contact: ${phc.contact_phone || '+91 20 2742 5555'}`;
-    
-    // Quick metric updates
+    document.getElementById("modalPhcDistrict").textContent = phc.district;
+    document.getElementById("modalPhcCoords").textContent = `${phc.lat}° N, ${phc.lng}° E`;
+    document.getElementById("modalPhcContact").textContent = phc.contact_phone || "+91 20 2742 5555";
+
+    const status = computePhcStatus(phc);
+    const badgeEl = document.getElementById("modalStatusBadge");
+    if (status === "critical") {
+      badgeEl.className = "inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-[#F8EFEF] text-[#A6362A] border border-[#E0BCB7]";
+      badgeEl.textContent = "Critical stockout";
+    } else if (status === "warning") {
+      badgeEl.className = "inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-[#FAF4E6] text-[#8A6508] border border-[#E6D4AA]";
+      badgeEl.textContent = "Low stock";
+    } else {
+      badgeEl.className = "inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-[#EDF5F3] text-[#0F6E63] border border-[#BAD5D0]";
+      badgeEl.textContent = "Optimal stock";
+    }
+
     const minDays = stockData.items.length > 0 ? Math.min(...stockData.items.map(i => i.days_left)) : 0;
     const worstEl = document.getElementById("modalWorstDays");
     worstEl.textContent = `${minDays.toFixed(1)} days`;
-    worstEl.className = `text-lg font-extrabold ${minDays < 5 ? 'text-rose-600' : minDays < 10 ? 'text-amber-600' : 'text-emerald-600'}`;
-
-    const dotEl = document.getElementById("modalStatusDot");
-    dotEl.className = `w-3.5 h-3.5 rounded-full ${minDays < 5 ? 'bg-rose-500 animate-ping' : minDays < 10 ? 'bg-amber-400' : 'bg-emerald-400'}`;
+    worstEl.className = `text-xl font-serif-masthead mt-1 tabular-nums font-bold ${minDays < 5 ? 'text-[#A6362A]' : minDays < 10 ? 'text-[#8A6508]' : 'text-[#0F6E63]'}`;
 
     document.getElementById("modalBeds").textContent = `${phc.beds_occupied || 18} / ${phc.bed_capacity || 30}`;
 
-    // Get today's footfall and attendance from history
     const latestFootfall = historyData.footfall.slice(-1)[0]?.patient_count || 65;
     const latestStaff = historyData.staff_attendance.slice(-1)[0];
     document.getElementById("modalFootfall").textContent = `${latestFootfall} patients`;
     document.getElementById("modalStaff").textContent = latestStaff ? `${latestStaff.present_count} / ${latestStaff.total_staff}` : "11 / 14";
 
-    // Render 21-day historical line chart
     renderHistoryChart(historyData);
-
-    // Render full stock table
-    renderStockTable(phcId, stockData.items);
+    renderStockTable(phcId, phc.name, stockData.items);
 
   } catch (err) {
     console.error("Modal loading error:", err);
-    showToast("Error loading PHC details: " + err.message, "error");
+    showToast("Error loading facility details: " + err.message, "error");
   }
 }
 
@@ -513,7 +709,7 @@ function renderHistoryChart(historyData) {
 
   const labels = historyData.footfall.map(item => {
     const parts = item.date.split("-");
-    return `${parts[1]}/${parts[2]}`; // MM/DD
+    return `${parts[1]}/${parts[2]}`;
   });
 
   const footfallValues = historyData.footfall.map(item => item.patient_count);
@@ -525,25 +721,25 @@ function renderHistoryChart(historyData) {
       labels: labels,
       datasets: [
         {
-          label: "Patient Footfall",
+          label: "Patient footfall",
           data: footfallValues,
-          borderColor: "#059669", // Emerald
-          backgroundColor: "rgba(5, 150, 105, 0.08)",
+          borderColor: "#0F6E63", // Teal
+          backgroundColor: "rgba(15, 110, 99, 0.06)",
           fill: true,
-          tension: 0.35,
-          borderWidth: 2.5,
-          pointRadius: 2,
+          tension: 0.3,
+          borderWidth: 2,
+          pointRadius: 1.5,
           yAxisID: "y"
         },
         {
-          label: "Staff Present",
+          label: "Staff on duty",
           data: staffValues,
-          borderColor: "#6366f1", // Indigo
+          borderColor: "#B8860B", // Turmeric accent
           backgroundColor: "transparent",
           borderDash: [4, 4],
           tension: 0.2,
-          borderWidth: 2,
-          pointRadius: 2,
+          borderWidth: 1.8,
+          pointRadius: 1.5,
           yAxisID: "y1"
         }
       ]
@@ -553,89 +749,94 @@ function renderHistoryChart(historyData) {
       maintainAspectRatio: false,
       interaction: { mode: "index", intersect: false },
       plugins: {
-        legend: { position: "top", labels: { boxWidth: 12, font: { size: 11 } } },
-        tooltip: { padding: 8 }
+        legend: { position: "top", labels: { boxWidth: 12, font: { family: "'Public Sans', sans-serif", size: 11 } } },
+        tooltip: { padding: 8, titleFont: { family: "'Public Sans', sans-serif" }, bodyFont: { family: "'Public Sans', sans-serif" } }
       },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+        x: { grid: { display: false }, ticks: { font: { family: "'Public Sans', sans-serif", size: 10 } } },
         y: {
           type: "linear",
           display: true,
           position: "left",
           title: { display: true, text: "Patients", font: { size: 10 } },
-          ticks: { font: { size: 10 } }
+          grid: { color: "#E5E9E1" },
+          ticks: { font: { family: "'Public Sans', sans-serif", size: 10 } }
         },
         y1: {
           type: "linear",
           display: true,
           position: "right",
           grid: { drawOnChartArea: false },
-          title: { display: true, text: "Staff Present", font: { size: 10 } },
-          ticks: { font: { size: 10 }, stepSize: 2 }
+          title: { display: true, text: "Staff", font: { size: 10 } },
+          ticks: { font: { family: "'Public Sans', sans-serif", size: 10 }, stepSize: 2 }
         }
       }
     }
   });
 }
 
-function renderStockTable(phcId, items) {
+function renderStockTable(phcId, phcName, items) {
   const tbody = document.getElementById("modalStockTableBody");
   if (!tbody) return;
 
   tbody.innerHTML = items.map(item => {
-    const isRed = item.status === "red";
-    const isAmber = item.status === "amber";
+    const isCritical = item.days_left < 5.0;
+    const isWarning = item.days_left >= 5.0 && item.days_left < 10.0;
 
-    // Progress bar width (max 30 days scale)
-    const barPercent = Math.min(100, Math.max(4, (item.days_left / 25) * 100));
-    const barColor = isRed ? "bg-rose-500" : isAmber ? "bg-amber-500" : "bg-emerald-500";
+    const barPercent = Math.min(100, Math.max(5, (item.days_left / 25) * 100));
+    const barColor = isCritical ? "bg-[#A6362A]" : isWarning ? "bg-[#B8860B]" : "bg-[#0F6E63]";
 
-    const statusBadge = isRed ? `
-      <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-700">
-        Critical (&lt;5d)
-      </span>
-    ` : isAmber ? `
-      <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-700">
-        Low (&lt;10d)
-      </span>
-    ` : `
-      <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-emerald-100 text-emerald-700">
+    let statusPill = `
+      <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#EDF5F3] text-[#0F6E63] border border-[#BAD5D0]">
         Optimal
       </span>
     `;
+    if (isCritical) {
+      statusPill = `
+        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#F8EFEF] text-[#A6362A] border border-[#E0BCB7]">
+          Critical
+        </span>
+      `;
+    } else if (isWarning) {
+      statusPill = `
+        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[#FAF4E6] text-[#8A6508] border border-[#E6D4AA]">
+          Low stock
+        </span>
+      `;
+    }
 
     return `
-      <tr class="hover:bg-slate-50 transition-colors">
+      <tr class="hover:bg-[#F6F8F4] transition-colors">
         <td class="py-2.5 px-3">
-          <div class="font-semibold text-slate-800">${item.name}</div>
-          <div class="text-[10px] text-slate-400">${item.category || 'Essential Medicine'}</div>
+          <div class="font-semibold text-[#1C2B29]">${item.name}</div>
+          <div class="text-[10px] text-[#697B78]">${item.category || 'Essential medicine'}</div>
         </td>
-        <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-900">
-          ${item.current_qty} <span class="text-[10px] font-normal text-slate-500">${item.unit}</span>
+        <td class="py-2.5 px-3 text-right tabular-nums font-semibold text-[#1C2B29]">
+          ${item.current_qty} <span class="text-[10px] font-normal text-[#697B78]">${item.unit}</span>
         </td>
-        <td class="py-2.5 px-3 text-right font-mono text-slate-600">
+        <td class="py-2.5 px-3 text-right tabular-nums text-[#526360]">
           ${item.avg_daily_consumption}/day
         </td>
         <td class="py-2.5 px-4">
           <div class="flex items-center space-x-2">
-            <div class="flex-1 bg-slate-200 rounded-full h-2 overflow-hidden">
-              <div class="${barColor} h-2 rounded-full transition-all" style="width: ${barPercent}%"></div>
+            <div class="flex-1 bg-[#E5E9E1] rounded-full h-1.5 overflow-hidden">
+              <div class="${barColor} h-1.5 rounded-full" style="width: ${barPercent}%"></div>
             </div>
-            <span class="w-12 text-right font-mono font-bold ${isRed ? 'text-rose-600' : isAmber ? 'text-amber-600' : 'text-slate-700'}">
+            <span class="w-12 text-right tabular-nums font-bold ${isCritical ? 'text-[#A6362A]' : isWarning ? 'text-[#8A6508]' : 'text-[#3D504D]'}">
               ${item.days_left}d
             </span>
           </div>
         </td>
         <td class="py-2.5 px-3 text-center">
-          ${statusBadge}
+          ${statusPill}
         </td>
         <td class="py-2.5 px-3 text-center">
           <button 
             onclick="triggerSimulateCrisis('${phcId}', '${item.medicine_id}')"
             title="Simulate stockout for this specific medicine"
-            class="px-2 py-1 rounded bg-slate-100 hover:bg-rose-100 hover:text-rose-700 text-slate-600 text-[10px] font-semibold border border-slate-200 hover:border-rose-300 transition-colors"
+            class="px-2 py-0.5 rounded bg-white hover:bg-[#F8EFEF] text-[#A6362A] text-[10px] font-medium border border-token transition-colors"
           >
-            ⚠️ Drop
+            Simulate drop
           </button>
         </td>
       </tr>
@@ -651,21 +852,18 @@ function showToast(message, type = "info") {
   if (!container) return;
 
   const toast = document.createElement("div");
-  let bgClass = "bg-slate-900 text-white border-slate-700";
+  let bgClass = "bg-[#1C2B29] text-white border-token";
   let iconName = "info";
 
-  if (type === "success") {
-    bgClass = "bg-emerald-900 text-emerald-100 border-emerald-700";
-    iconName = "check-circle";
-  } else if (type === "warning") {
-    bgClass = "bg-amber-900 text-amber-100 border-amber-700";
+  if (type === "warning") {
+    bgClass = "bg-[#FAF4E6] text-[#8A6508] border-[#E6D4AA]";
     iconName = "alert-triangle";
   } else if (type === "error" || type === "crisis") {
-    bgClass = "bg-rose-900 text-rose-100 border-rose-700 shadow-xl ring-2 ring-rose-500/50";
-    iconName = "alert-octagon";
+    bgClass = "bg-[#F8EFEF] text-[#A6362A] border-[#E0BCB7]";
+    iconName = "alert-circle";
   }
 
-  toast.className = `${bgClass} pointer-events-auto flex items-center space-x-2.5 px-4 py-3 rounded-xl shadow-lg border text-xs max-w-md transition-all duration-300 transform translate-x-full`;
+  toast.className = `${bgClass} pointer-events-auto flex items-center space-x-2.5 px-3.5 py-2.5 rounded shadow-md border text-xs max-w-sm transition-all duration-200`;
   toast.innerHTML = `
     <i data-lucide="${iconName}" class="w-4 h-4 shrink-0"></i>
     <span class="flex-1 font-medium leading-snug">${message}</span>
@@ -674,14 +872,8 @@ function showToast(message, type = "info") {
   container.appendChild(toast);
   lucide.createIcons();
 
-  // Slide in
-  requestAnimationFrame(() => {
-    toast.classList.remove("translate-x-full");
-  });
-
-  // Slide out and remove
   setTimeout(() => {
-    toast.classList.add("translate-x-full", "opacity-0");
-    setTimeout(() => toast.remove(), 400);
-  }, 4500);
+    toast.style.opacity = "0";
+    setTimeout(() => toast.remove(), 300);
+  }, 4200);
 }

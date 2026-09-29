@@ -178,5 +178,34 @@ class Database:
             return True
         return False
 
+    def delete_document(self, collection: str, doc_id: str) -> bool:
+        doc_id = str(doc_id)
+        if self.is_firestore and self.firestore_client:
+            try:
+                self.firestore_client.collection(collection).document(doc_id).delete()
+            except Exception as e:
+                logger.error(f"Firestore delete_document error: {e}")
+
+        if collection in self._local_data and doc_id in self._local_data[collection]:
+            del self._local_data[collection][doc_id]
+            self._save_local_data()
+            return True
+        return False
+
+    def clear_collection(self, collection: str) -> bool:
+        if self.is_firestore and self.firestore_client:
+            try:
+                docs = self.firestore_client.collection(collection).stream()
+                for doc in docs:
+                    doc.reference.delete()
+            except Exception as e:
+                logger.error(f"Firestore clear_collection error: {e}")
+
+        if collection in self._local_data:
+            self._local_data[collection] = {}
+            self._save_local_data()
+            return True
+        return False
+
 # Global database instance
 db = Database()

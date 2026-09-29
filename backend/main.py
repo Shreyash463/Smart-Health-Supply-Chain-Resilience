@@ -133,13 +133,13 @@ def get_phcs() -> List[Dict[str, Any]]:
                 max_days = days_left
                 healthiest_med_id = s.get("medicine_id")
 
-        # Color-code determination:
+        # Color-code determination: pure function of live stock array
         # Green = everything > 10 days left
         # Amber = something < 10 days left
-        # Red = something < 5 days left OR already alerted
-        if at_risk_count > 0 or len(phc_alerts) > 0 or worst_days < 5.0:
+        # Red = something < 5 days left (at-risk stockout)
+        if worst_days < 5.0 or at_risk_count > 0:
             status = "red"
-        elif amber_count > 0 or worst_days < 10.0:
+        elif worst_days < 10.0 or amber_count > 0:
             status = "amber"
         else:
             status = "green"
@@ -344,14 +344,7 @@ def simulate_crisis(phc_id: str, medicine_id: str) -> Dict[str, Any]:
         "last_updated": now_iso
     })
 
-    # Clear any previous resolved or active alert for this pair so a fresh alert is guaranteed for the demo
-    all_alerts = db.list_documents("alerts")
-    for a in all_alerts:
-        if a.get("phc_id") == phc_id and a.get("medicine_id") == medicine_id:
-            # Mark existing resolved or remove from active check so fresh Gemini prompt is triggered
-            db.update_document("alerts", a["id"], {"resolved": True})
-
-    # 2. Immediately run forecast + alert pipeline
+    # 2. Immediately run forecast + alert pipeline (checks for existing unresolved alert to prevent duplicates)
     generated_alert = gemini_service.generate_stockout_alert(
         db_instance=db,
         phc_id=phc_id,
@@ -361,13 +354,18 @@ def simulate_crisis(phc_id: str, medicine_id: str) -> Dict[str, Any]:
         avg_daily_consumption=daily_cons
     )
 
-    logger.info(f"Simulate Crisis fired for {phc_id} - {medicine_id}: Generated alert {generated_alert.get('id') if generated_alert else 'none'}")
+    med_doc = db.get_document("medicines", medicine_id)
+    medicine_name = med_doc.get("name", medicine_id) if med_doc else medicine_id
+
+    logger.info(f"Simulate Crisis fired for {phc.get('name')} - {medicine_name}: Alert {generated_alert.get('id') if generated_alert else 'none'}")
 
     return {
         "success": True,
-        "message": f"Simulated crisis triggered for {phc.get('name')} - {medicine_id}.",
+        "message": f"Simulated crisis triggered for {phc.get('name')} - {medicine_name}.",
         "phc_id": phc_id,
+        "phc_name": phc.get("name"),
         "medicine_id": medicine_id,
+        "medicine_name": medicine_name,
         "new_quantity": critical_qty,
         "days_left": round(days_left, 1),
         "alert": generated_alert
@@ -399,16 +397,56 @@ def get_phc_history(phc_id: str) -> Dict[str, Any]:
 
 @app.post("/alerts/{alert_id}/resolve", tags=["Alerts"])
 def resolve_alert(alert_id: str) -> Dict[str, Any]:
-    """Marks an alert as resolved (demonstrating operational workflow resolution)."""
+    """Marks an alert as resolved and rebalances stock to safe operational levels."""
     alert = db.get_document("alerts", alert_id)
     if not alert:
         raise HTTPException(status_code=404, detail=f"Alert '{alert_id}' not found.")
 
+    phc_id = alert.get("phc_id")
+    medicine_id = alert.get("medicine_id")
+    donor_id = alert.get("donor_phc_id")
+    now_iso = datetime.now(timezone.utc).isoformat()
+
     db.update_document("alerts", alert_id, {
         "resolved": True,
-        "resolved_at": datetime.now(timezone.utc).isoformat()
+        "resolved_at": now_iso
     })
-    return {"success": True, "alert_id": alert_id, "resolved": True}
+
+    # Replenish recipient PHC's stock so at-risk condition immediately clears
+    stock_doc_id = f"{phc_id}_{medicine_id}"
+    target_stock = db.get_document("stock", stock_doc_id)
+    if target_stock:
+        daily_cons = target_stock.get("avg_daily_consumption", 2.0)
+        if daily_cons <= 0:
+            daily_cons = 2.0
+        # Restore stock to a safe 14-day runway
+        replenish_qty = int(daily_cons * 14)
+        transferred_amount = max(replenish_qty - target_stock.get("current_qty", 0), int(daily_cons * 8))
+        new_qty = target_stock.get("current_qty", 0) + transferred_amount
+        db.update_document("stock", stock_doc_id, {
+            "current_qty": new_qty,
+            "last_updated": now_iso
+        })
+
+        # Deduct transferred amount from donor PHC if specified
+        if donor_id:
+            donor_stock_id = f"{donor_id}_{medicine_id}"
+            donor_stock = db.get_document("stock", donor_stock_id)
+            if donor_stock:
+                donor_qty = max(0, donor_stock.get("current_qty", 0) - transferred_amount)
+                db.update_document("stock", donor_stock_id, {
+                    "current_qty": donor_qty,
+                    "last_updated": now_iso
+                })
+
+    return {
+        "success": True,
+        "alert_id": alert_id,
+        "resolved": True,
+        "phc_id": phc_id,
+        "medicine_id": medicine_id,
+        "message": f"Alert {alert_id} resolved and stock rebalanced successfully."
+    }
 
 @app.post("/seed", tags=["System"])
 def trigger_seed(force: bool = True) -> Dict[str, Any]:

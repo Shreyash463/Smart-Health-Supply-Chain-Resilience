@@ -1,12 +1,13 @@
 import pytest
 from fastapi.testclient import TestClient
-from backend.main import app
+from backend.main import app, run_network_wide_forecast_scan
 from backend.database import db
 from backend.seed_data import seed_database
 
 @pytest.fixture(autouse=True)
 def setup_database():
     seed_database(force_reseed=True)
+    run_network_wide_forecast_scan()
 
 client = TestClient(app)
 
@@ -112,3 +113,57 @@ def test_resolve_alert():
     resolve_res = client.post(f"/alerts/{alert_to_resolve}/resolve")
     assert resolve_res.status_code == 200
     assert resolve_res.json()["resolved"] is True
+
+def test_duplicate_alert_prevention():
+    # Trigger crisis on PHC Chikhli for Paracetamol
+    phc_id = "phc_chikhli"
+    med_id = "med_paracetamol"
+
+    res1 = client.post(f"/simulate-crisis/{phc_id}/{med_id}")
+    assert res1.status_code == 200
+    alert_1 = res1.json()["alert"]
+
+    # Trigger second time in a row
+    res2 = client.post(f"/simulate-crisis/{phc_id}/{med_id}")
+    assert res2.status_code == 200
+    alert_2 = res2.json()["alert"]
+
+    # Must return the SAME unresolved alert without duplicating
+    assert alert_1["id"] == alert_2["id"]
+
+    # Verify in the active alerts list there is only ONE active alert for this phc+med pair
+    all_active = [
+        a for a in client.get("/alerts").json()
+        if a["phc_id"] == phc_id and a["medicine_id"] == med_id and not a.get("resolved", False)
+    ]
+    assert len(all_active) == 1
+
+def test_reset_baseline_end_to_end():
+    # 1. Trigger a crisis on a previously green PHC (Chikhli)
+    client.post("/simulate-crisis/phc_chikhli/med_paracetamol")
+    phcs = client.get("/phcs").json()
+    chikhli = next(p for p in phcs if p["id"] == "phc_chikhli")
+    assert chikhli["status"] == "red"
+
+    # 2. Trigger Reset Baseline
+    reset_res = client.post("/seed")
+    assert reset_res.status_code == 200
+
+    # 3. Verify Chikhli is restored to green, stock is restored, and only baseline alerts exist
+    phcs_after = client.get("/phcs").json()
+    chikhli_after = next(p for p in phcs_after if p["id"] == "phc_chikhli")
+    assert chikhli_after["status"] == "green"
+    assert chikhli_after["worst_days_left"] > 10.0
+
+    active_alerts = client.get("/alerts").json()
+    # No lingering alert for Chikhli
+    chikhli_alerts = [a for a in active_alerts if a["phc_id"] == "phc_chikhli"]
+    assert len(chikhli_alerts) == 0
+
+def test_intra_district_surplus_isolation():
+    # Kiwale is in Pimpri-Chinchwad; its Insulin stockout must match with Talegaon (also in Pimpri-Chinchwad), never Nation B
+    alerts = client.get("/alerts").json()
+    kiwale_alert = next((a for a in alerts if a["phc_id"] == "phc_kiwale"), None)
+    if kiwale_alert and kiwale_alert.get("donor_phc_id"):
+        assert kiwale_alert["donor_phc_id"] in ["phc_talegaon", "phc_chikhli", "phc_dehu_road"]
+        assert "Pimpri-Chinchwad" in kiwale_alert["district"]

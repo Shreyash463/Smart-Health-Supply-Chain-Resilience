@@ -36,11 +36,12 @@ The **Smart Health & Supply Chain Resilience Platform** provides an end-to-end o
 ```mermaid
 flowchart TD
     subgraph Frontend["Client Layer (Vanilla JS + Tailwind + Chart.js)"]
-        UI["Executive Dashboard (index.html)"]
-        Grid["PHC Color-Coded Status Grid"]
-        DetailModal["PHC Modal: 21-Day Footfall Trends & Inventory"]
-        CrisisBtn["⚠️ Simulate Crisis Trigger Button"]
-        AlertsPanel["Live Gemini Early Warning Feed"]
+        UI["Operations Bulletin Dashboard (index.html)"]
+        HeroMap["Hero Network Resilience Map (Interactive SVG with Transfer Arcs)"]
+        Ledger["Health Centre Operational Ledger & Manifest"]
+        DetailModal["Facility Detail Modal: 21-Day Trends & Inventory Runway"]
+        CrisisBtn["Interactive 'Simulate Crisis' Trigger Button"]
+        WireFeed["Operations Dispatch Wire Feed (Gemini Flash Alerts)"]
     end
 
     subgraph Backend["Backend Layer (FastAPI on Google Cloud Run)"]
@@ -88,7 +89,33 @@ flowchart TD
 
 ---
 
-## 5. Technology Stack
+## 5. Design System & Visual Language (Phase 2 Overhaul)
+
+Departing from generic SaaS conventions, the Phase 2 interface is engineered as an **official public health operations bulletin**:
+
+### Palette Tokens (Defined as CSS Variables)
+- `--paper` (`#EEF1EC`): Cool, pale, paper-like background.
+- `--ink` (`#1C2B29`): Deep teal-charcoal primary text (contrast > 12:1 on paper).
+- `--teal` (`#0F6E63`): Primary accent & optimal-resilient status indicator.
+- `--vermillion` (`#A6362A`): Muted brick-red critical status indicator.
+- `--turmeric` (`#8A6508` / `#B8860B`): Ochre low-stock warning indicator (strictly tuned for WCAG AA text contrast).
+- `--line` (`#C9C2B4`): Muted warm grey borders and ledger dividers.
+
+### Typography & Editorial Standards
+- **Headlines / Masthead**: **Fraunces** — high-character serif establishing official bulletin hierarchy.
+- **Body & Data**: **Public Sans** — U.S. Web Design System typeface for accessible public-sector infrastructure.
+- **Tabular Lining Figures**: `font-variant-numeric: tabular-nums` applied across all inventory counts, patient footfall figures, and days-left runways.
+- **Sentence-Case Formatting**: Zero all-caps shouting; all labels, status pills, and dispatches formatted in clean sentence case.
+- **Stacked Metadata**: Eliminated middot (`•`) chains in favor of clean label-value definitions.
+
+### Hero Network Resilience Map & Motion
+- **Geographic SVG Schematic**: Plots all 8 primary health centres across two distinct administrative clusters (*District 1: Pimpri-Chinchwad* and *District 2: Nation B*).
+- **Interactive Node States**: Dynamic node sizing and color mapping reflecting live stock risk tiers.
+- **The One Motion Investment**: When a crisis is simulated or an active alert recommends lateral rebalancing, the map renders an **animated redistribution corridor** (dashed vector arc with directional flow) connecting the donor facility to the recipient facility. Automatically degrades gracefully under `prefers-reduced-motion`.
+
+---
+
+## 6. Technology Stack
 
 | Layer | Component | Specification |
 |---|---|---|
@@ -102,7 +129,7 @@ flowchart TD
 
 ---
 
-## 6. Data Model (Firestore Collections)
+## 7. Data Model (Firestore Collections)
 
 1. `phcs`:
    - `id`: Unique string (e.g. `phc_kiwale`, `phc_talegaon`, `phc_alandi`)
@@ -129,7 +156,7 @@ flowchart TD
 
 ---
 
-## 7. API Endpoints Reference
+## 8. API Endpoints Reference
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -140,12 +167,12 @@ flowchart TD
 | `GET` | `/alerts` | Retrieves unresolved early warning directives, newest first |
 | `POST` | `/simulate-crisis/{phc_id}/{medicine_id}` | Drops quantity to 2 units, triggers forecast+Gemini redistribution alert |
 | `GET` | `/phc/{phc_id}/history` | Returns 21-day trailing footfall and attendance data for Chart.js |
-| `POST` | `/alerts/{alert_id}/resolve` | Marks an alert as resolved |
+| `POST` | `/alerts/{alert_id}/resolve` | Marks an alert as resolved and rebalances stock |
 | `POST` | `/seed` | Idempotently resets database back to baseline demo scenario |
 
 ---
 
-## 8. Local Setup & Quickstart Guide
+## 9. Local Setup & Quickstart Guide
 
 ### Prerequisites
 - Python 3.11+ (Python 3.13 tested and verified)
@@ -154,8 +181,8 @@ flowchart TD
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/your-username/smart-health-resilience.git
-cd smart-health-resilience
+git clone https://github.com/Shreyash463/Smart-Health-Supply-Chain-Resilience.git
+cd Smart-Health-Supply-Chain-Resilience
 ```
 
 ### Step 2: Set Up Python Virtual Environment
@@ -188,7 +215,6 @@ HOST=0.0.0.0
 # Optional: Path to Firebase Service Account JSON or inline JSON string
 FIREBASE_SERVICE_ACCOUNT_JSON=
 ```
-*(If `FIREBASE_SERVICE_ACCOUNT_JSON` is left empty, the application automatically uses its built-in local JSON persistence engine, requiring zero GCP setup for local evaluation!)*
 
 ### Step 5: Seed the Database
 ```bash
@@ -202,29 +228,32 @@ pytest tests/test_api.py -v
 
 ### Step 7: Launch the Application
 ```bash
-python backend/main.py
+python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 Open your browser and navigate to:
 **`http://localhost:8000`**
 
 ---
 
-## 9. Live Demo Walkthrough (For Hackathon Judges)
+## 10. Live Demo Walkthrough (For Hackathon Judges)
 
-1. **Initial Assessment**:
-   - Notice that upon initial load, **PHC Kiwale** (`Pimpri-Chinchwad`) is flagged **RED** due to an imminent **Insulin** stockout (`2.3 days left`).
-   - Notice that **PHC Alandi** (`Nation B`) is flagged **RED** due to an imminent **ORS sachets** stockout (`2.5 days left`).
-   - Notice the **Alerts Feed** already displays Gemini-generated operational directives pairing Kiwale with surplus from Talegaon, and Alandi with surplus from Khed.
+1. **Initial Assessment & Network Resilience Map**:
+   - Notice the **Network Resilience Map** plotting all 8 facilities across *District 1 (Pimpri-Chinchwad)* and *District 2 (Nation B)*.
+   - **PHC Kiwale** and **PHC Alandi** appear as pulsing vermillion nodes with an active **animated lateral transfer arc** drawn from their respective intra-district donor facilities (**PHC Talegaon** and **PHC Khed**).
+   - In the **Health Centre Ledger**, observe figures rendered in clean tabular lining numerals.
 2. **Interactive PHC Inspection**:
-   - Click **Inspect** on any card (e.g. *PHC Kiwale*).
+   - Click any node on the map or click **Inspect** on a ledger row (e.g. *PHC Kiwale*).
    - Review the **21-day historical footfall & attendance chart** (Chart.js) and the color-coded **runway progress bars**.
 3. **Trigger Live Crisis Simulation**:
-   - On a healthy green facility (e.g., **PHC Chikhli** or **PHC Talegaon**), click the prominent **⚠️ Simulate Crisis** button.
+   - On a healthy green facility (e.g., **PHC Chikhli**), click the **Simulate crisis** button.
    - The button initiates `POST /simulate-crisis/...` for that centre's healthiest medicine.
-   - Watch the card dynamically turn **RED**, a critical toast notification appear, and a new 2–3 line Gemini redistribution recommendation populate at the top of the alerts feed recommending a specific quantity transfer from a peer facility with surplus!
-4. **District Filter & Mobile Inspection**:
-   - Switch between `All PHCs`, `Pimpri-Chinchwad`, and `Nation B` tabs.
-   - Resize the window or inspect on a mobile device to confirm full touch responsiveness.
+   - Watch the facility node dynamically turn vermillion on the map, a new **animated redistribution arc** appear connecting the donor facility, and a new 2–3 line Gemini redistribution recommendation populate on the **Operations Dispatch Wire**!
+4. **Resolution & Rebalancing**:
+   - Click **Acknowledge & resolve** on the dispatch wire.
+   - Observe that the alert clears, clinical inventory is rebalanced, the facility status immediately returns to green, and the **Critical Stockouts** counter in the masthead reduces instantly.
+5. **District Filter & Mobile Inspection**:
+   - Switch between `All centres`, `Pimpri-Chinchwad`, and `Nation B nodes` tabs.
+   - Resize the window or inspect on a mobile device to confirm full touch responsiveness and WCAG AA contrast.
 
 ---
 

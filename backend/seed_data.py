@@ -129,6 +129,10 @@ def seed_database(force_reseed: bool = False):
 
     print("Seeding database with realistic healthcare network data...")
 
+    if force_reseed:
+        # Clear previous alerts so reset restores clean baseline without leftover crisis alerts
+        db.clear_collection("alerts")
+
     # 1. Seed PHCs
     for phc in PHCS:
         db.set_document("phcs", phc["id"], phc)

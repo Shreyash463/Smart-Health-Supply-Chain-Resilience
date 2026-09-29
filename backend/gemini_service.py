@@ -144,7 +144,7 @@ class GeminiAlertService:
             )
             recommended_order = int(max(50, avg_daily_consumption * 20))
             fallback_message = (
-                f"CRITICAL WARNING: {phc_name} has only {current_qty} {unit} of {medicine_name} left (~{rounded_days} days of clinical stock). "
+                f"Critical procurement alert: {phc_name} in {district} has only {current_qty} {unit} of {medicine_name} left (~{rounded_days} days of clinical stock). "
                 f"No intra-district surplus is available, so an emergency procurement order of {recommended_order} {unit} must be dispatched immediately. "
                 f"Expedited delivery is essential to prevent a complete stockout within the next 48 to 72 hours."
             )
